@@ -28,7 +28,7 @@ class WebController extends Controller
         $this->meta['title'] = 'AFEC';
 
         $header = [
-            'introduction' => 'Nous servons partout mgl',
+            'introduction' => 'Chaque geste compte, chaque vie mérite d’être changée',
             'image' => 'storage/header-1.jpeg',
         ];
 

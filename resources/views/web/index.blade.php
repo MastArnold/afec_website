@@ -34,7 +34,7 @@
             </div>
             <div class="w-full lg:w-1/2 space-y-4" data-aos="fade-right">
                 <div class="space-y-2">
-                    <p class="leading-relaxed">
+                    <p class="text-lg/7 lg:text-sm/7">
                         {!! $home['about']['us'] !!}
                     </p>
                 </div>
