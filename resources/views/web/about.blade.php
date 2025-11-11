@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <header class="relative w-full flex flex-col lg:flex-row justify-between gap-4 bg-white px-8 lg:px-24 pt-32 pb-8 lg:pt-32 lg:pb-32">
-            <div class="w-full lg:w-3/5">
+            <div class="w-full lg:w-3/5" data-aos="fade-up" data-aos-delay="200">
                 <div class="space-y-8 lg:space-y-16">
                     <h1 class="text-gray-900 text-3xl lg:text-6xl font-bold font-sans text-center lg:text-left">Ce que nous sommes, <br> notre mission, <br> nos valeurs...</h1>
                     <p class="text-gray-600 leading-relaxed text-xl lg:text-lg text-left lg:pr-32">Lorem ipsum dolor sit amet, 
@@ -16,7 +16,7 @@
                     </p>
                 </div>
             </div>
-            <div class="w-full lg:w-2/5 mt-8 lg:mt-0">
+            <div class="w-full lg:w-2/5 mt-8 lg:mt-0" data-aos="fade-up">
                 <div class="w-full flex flex-row gap-8">
                     <div class="w-1/2 flex flex-col gap-8">
                         <div class="w-full aspect-[9/12] bg-cover rounded-lg" style="background-image: url('{{ asset('storage/about/col-1-row-1.jpg') }}');"></div>
@@ -32,7 +32,7 @@
     </x-slot>
     
     <!-- Mission -->
-    <section class="w-full px-8 lg:px-32 py-8 lg:py-16">
+    <section class="w-full px-8 lg:px-32 py-8 lg:py-16" data-aos="fade-up" data-aos-delay="300">
         <h1 class="text-4xl lg:text-3xl text-center lg:text-left text-gray-600 font-bold">Notre mission</h1>
 
         <div class="w-full flex flex-col-reverse lg:flex-row justify-between py-8 lg:py-12">
@@ -63,13 +63,13 @@
 
     <!-- Valeurs -->
     <section class="px-8 lg:px-32 py-8 lg:py-16 space-y-8">
-        <div>
+        <div data-aos="fade-up">
             <h4 class="text-3xl lg:text-3xl text-gray-800 font-bold font-sans">Nos valeurs</h4>
             <p class="text-xl text-gray-600">Nos valeurs</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div class="space-y-6">
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="flex items-center gap-4">
                     <svg class="w-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.5416 13.5936C27.1257 12.0632 28.4179 11.298 29.3669 11.8409C30.3159 12.3839 30.2931 13.8754 30.2477 16.8584L30.2361 17.6301C30.2232 18.4778 30.2167 18.9016 30.3747 19.2741C30.5327 19.6464 30.8372 19.9254 31.4462 20.4832L32.0006 20.9911C34.1437 22.9542 35.2152 23.9358 34.9641 25.0381C34.7129 26.1403 33.3052 26.6333 30.4902 27.6191L29.7619 27.8743C28.9619 28.1544 28.5619 28.2944 28.2551 28.5753C27.9482 28.8563 27.7692 29.2461 27.4112 30.0256L27.0854 30.7354C25.8256 33.4791 25.1957 34.8509 24.0916 34.9893C22.9874 35.1276 22.1401 33.9408 20.4456 31.5671L20.0072 30.9529C19.5257 30.2784 19.2849 29.9413 18.9372 29.7423C18.5897 29.5434 18.1746 29.5054 17.3442 29.4294L16.5885 29.3603C13.6668 29.0929 12.206 28.9591 11.7748 27.9424C11.3435 26.9256 12.2275 25.6991 13.9953 23.2462L14.4527 22.6116C14.9551 21.9146 15.2063 21.5661 15.2983 21.1622C15.3903 20.7586 15.3127 20.3452 15.1576 19.5186L15.0163 18.7661C14.4704 15.8571 14.1974 14.4027 15.0351 13.636C15.8728 12.8693 17.2664 13.2981 20.0534 14.1557L20.7746 14.3776C21.5666 14.6214 21.9626 14.7432 22.3671 14.6925C22.7716 14.6419 23.1387 14.4244 23.8731 13.9895L24.5416 13.5936Z" fill="#0B2393"/>
@@ -81,7 +81,7 @@
                 
                 <p class="text-gray-600 text-md">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse accusantium sequi ea et in. Accusantium, non expedita possimus quisquam mollitia, facere nihil animi earum laboriosam eaque deserunt voluptatibus laborum illo!</p>
             </div>
-            <div class="space-y-6">
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="400">
                 <div class="flex items-center gap-4">
                     <svg class="w-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.5416 13.5936C27.1257 12.0632 28.4179 11.298 29.3669 11.8409C30.3159 12.3839 30.2931 13.8754 30.2477 16.8584L30.2361 17.6301C30.2232 18.4778 30.2167 18.9016 30.3747 19.2741C30.5327 19.6464 30.8372 19.9254 31.4462 20.4832L32.0006 20.9911C34.1437 22.9542 35.2152 23.9358 34.9641 25.0381C34.7129 26.1403 33.3052 26.6333 30.4902 27.6191L29.7619 27.8743C28.9619 28.1544 28.5619 28.2944 28.2551 28.5753C27.9482 28.8563 27.7692 29.2461 27.4112 30.0256L27.0854 30.7354C25.8256 33.4791 25.1957 34.8509 24.0916 34.9893C22.9874 35.1276 22.1401 33.9408 20.4456 31.5671L20.0072 30.9529C19.5257 30.2784 19.2849 29.9413 18.9372 29.7423C18.5897 29.5434 18.1746 29.5054 17.3442 29.4294L16.5885 29.3603C13.6668 29.0929 12.206 28.9591 11.7748 27.9424C11.3435 26.9256 12.2275 25.6991 13.9953 23.2462L14.4527 22.6116C14.9551 21.9146 15.2063 21.5661 15.2983 21.1622C15.3903 20.7586 15.3127 20.3452 15.1576 19.5186L15.0163 18.7661C14.4704 15.8571 14.1974 14.4027 15.0351 13.636C15.8728 12.8693 17.2664 13.2981 20.0534 14.1557L20.7746 14.3776C21.5666 14.6214 21.9626 14.7432 22.3671 14.6925C22.7716 14.6419 23.1387 14.4244 23.8731 13.9895L24.5416 13.5936Z" fill="#0B2393"/>
@@ -93,7 +93,7 @@
                 
                 <p class="text-gray-600 text-md">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse accusantium sequi ea et in. Accusantium, non expedita possimus quisquam mollitia, facere nihil animi earum laboriosam eaque deserunt voluptatibus laborum illo!</p>
             </div>
-            <div class="space-y-6">
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="600">
                 <div class="flex items-center gap-4">
                     <svg class="w-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.5416 13.5936C27.1257 12.0632 28.4179 11.298 29.3669 11.8409C30.3159 12.3839 30.2931 13.8754 30.2477 16.8584L30.2361 17.6301C30.2232 18.4778 30.2167 18.9016 30.3747 19.2741C30.5327 19.6464 30.8372 19.9254 31.4462 20.4832L32.0006 20.9911C34.1437 22.9542 35.2152 23.9358 34.9641 25.0381C34.7129 26.1403 33.3052 26.6333 30.4902 27.6191L29.7619 27.8743C28.9619 28.1544 28.5619 28.2944 28.2551 28.5753C27.9482 28.8563 27.7692 29.2461 27.4112 30.0256L27.0854 30.7354C25.8256 33.4791 25.1957 34.8509 24.0916 34.9893C22.9874 35.1276 22.1401 33.9408 20.4456 31.5671L20.0072 30.9529C19.5257 30.2784 19.2849 29.9413 18.9372 29.7423C18.5897 29.5434 18.1746 29.5054 17.3442 29.4294L16.5885 29.3603C13.6668 29.0929 12.206 28.9591 11.7748 27.9424C11.3435 26.9256 12.2275 25.6991 13.9953 23.2462L14.4527 22.6116C14.9551 21.9146 15.2063 21.5661 15.2983 21.1622C15.3903 20.7586 15.3127 20.3452 15.1576 19.5186L15.0163 18.7661C14.4704 15.8571 14.1974 14.4027 15.0351 13.636C15.8728 12.8693 17.2664 13.2981 20.0534 14.1557L20.7746 14.3776C21.5666 14.6214 21.9626 14.7432 22.3671 14.6925C22.7716 14.6419 23.1387 14.4244 23.8731 13.9895L24.5416 13.5936Z" fill="#0B2393"/>
@@ -105,7 +105,7 @@
                 
                 <p class="text-gray-600 text-md">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse accusantium sequi ea et in. Accusantium, non expedita possimus quisquam mollitia, facere nihil animi earum laboriosam eaque deserunt voluptatibus laborum illo!</p>
             </div>
-            <div class="space-y-6">
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="600">
                 <div class="flex items-center gap-4">
                     <svg class="w-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.5416 13.5936C27.1257 12.0632 28.4179 11.298 29.3669 11.8409C30.3159 12.3839 30.2931 13.8754 30.2477 16.8584L30.2361 17.6301C30.2232 18.4778 30.2167 18.9016 30.3747 19.2741C30.5327 19.6464 30.8372 19.9254 31.4462 20.4832L32.0006 20.9911C34.1437 22.9542 35.2152 23.9358 34.9641 25.0381C34.7129 26.1403 33.3052 26.6333 30.4902 27.6191L29.7619 27.8743C28.9619 28.1544 28.5619 28.2944 28.2551 28.5753C27.9482 28.8563 27.7692 29.2461 27.4112 30.0256L27.0854 30.7354C25.8256 33.4791 25.1957 34.8509 24.0916 34.9893C22.9874 35.1276 22.1401 33.9408 20.4456 31.5671L20.0072 30.9529C19.5257 30.2784 19.2849 29.9413 18.9372 29.7423C18.5897 29.5434 18.1746 29.5054 17.3442 29.4294L16.5885 29.3603C13.6668 29.0929 12.206 28.9591 11.7748 27.9424C11.3435 26.9256 12.2275 25.6991 13.9953 23.2462L14.4527 22.6116C14.9551 21.9146 15.2063 21.5661 15.2983 21.1622C15.3903 20.7586 15.3127 20.3452 15.1576 19.5186L15.0163 18.7661C14.4704 15.8571 14.1974 14.4027 15.0351 13.636C15.8728 12.8693 17.2664 13.2981 20.0534 14.1557L20.7746 14.3776C21.5666 14.6214 21.9626 14.7432 22.3671 14.6925C22.7716 14.6419 23.1387 14.4244 23.8731 13.9895L24.5416 13.5936Z" fill="#0B2393"/>
@@ -117,7 +117,7 @@
                 
                 <p class="text-gray-600 text-md">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse accusantium sequi ea et in. Accusantium, non expedita possimus quisquam mollitia, facere nihil animi earum laboriosam eaque deserunt voluptatibus laborum illo!</p>
             </div>
-            <div class="space-y-6">
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="400">
                 <div class="flex items-center gap-4">
                     <svg class="w-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.5416 13.5936C27.1257 12.0632 28.4179 11.298 29.3669 11.8409C30.3159 12.3839 30.2931 13.8754 30.2477 16.8584L30.2361 17.6301C30.2232 18.4778 30.2167 18.9016 30.3747 19.2741C30.5327 19.6464 30.8372 19.9254 31.4462 20.4832L32.0006 20.9911C34.1437 22.9542 35.2152 23.9358 34.9641 25.0381C34.7129 26.1403 33.3052 26.6333 30.4902 27.6191L29.7619 27.8743C28.9619 28.1544 28.5619 28.2944 28.2551 28.5753C27.9482 28.8563 27.7692 29.2461 27.4112 30.0256L27.0854 30.7354C25.8256 33.4791 25.1957 34.8509 24.0916 34.9893C22.9874 35.1276 22.1401 33.9408 20.4456 31.5671L20.0072 30.9529C19.5257 30.2784 19.2849 29.9413 18.9372 29.7423C18.5897 29.5434 18.1746 29.5054 17.3442 29.4294L16.5885 29.3603C13.6668 29.0929 12.206 28.9591 11.7748 27.9424C11.3435 26.9256 12.2275 25.6991 13.9953 23.2462L14.4527 22.6116C14.9551 21.9146 15.2063 21.5661 15.2983 21.1622C15.3903 20.7586 15.3127 20.3452 15.1576 19.5186L15.0163 18.7661C14.4704 15.8571 14.1974 14.4027 15.0351 13.636C15.8728 12.8693 17.2664 13.2981 20.0534 14.1557L20.7746 14.3776C21.5666 14.6214 21.9626 14.7432 22.3671 14.6925C22.7716 14.6419 23.1387 14.4244 23.8731 13.9895L24.5416 13.5936Z" fill="#0B2393"/>
@@ -133,7 +133,8 @@
     </section>
 
     <!-- Partenaires -->
-    <section class="relative w-full lg:min-h-[70vh] px-8 lg:px-32 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1558522195-e1201b090344?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGFydG5lcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600'); background-size: cover; background-position: center;">
+    <section class="relative w-full lg:min-h-[70vh] px-8 lg:px-32 bg-cover bg-center" data-aos="fade-down" data-aos-delay="300"
+            style="background-image: url('https://images.unsplash.com/photo-1558522195-e1201b090344?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGFydG5lcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600'); background-size: cover; background-position: center;">
         <div class="py-12 space-y-8 lg:space-y-16">        
             <h4 class="relative z-10 text-2xl lg:text-3xl text-gray-800 font-bold text-center">Nos partenaires nous font confiance</h4>
             
@@ -152,7 +153,7 @@
     </section>
 
     <!-- Equipe -->
-    <section class="px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8">
+    <section class="px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8" data-aos="fade-up" data-aos-delay="300">
         <div class="space-y-1 mb-12 lg:mb-0">
             <h4 class="text-4xl lg:text-3xl text-gray-800 font-sans font-bold">Notre équpe</h4>
             <p class="text-xl text-gray-600">Lorem ipsum</p>
@@ -160,7 +161,7 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
             @foreach ([1,1,1,1,1,1,1,1,1,1,1] as $i)
-                <div class="space-y-4 lg:space-y-6">
+                <div class="space-y-4 lg:space-y-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <div class="w-16 h-16 rounded-full overflow-hidden mx-auto">
                         <img class="w-full object-cover scale-110" src="https://images.unsplash.com/photo-1761872936205-88ce12255c24?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDQyfHRvd0paRnNrcEdnfHxlbnwwfHx8fHw%3D&auto=format&fit=crop&q=60&w=600" alt="photo equipe">
                     </div>
@@ -175,7 +176,7 @@
     </section>
 
     <!-- Rapport et publication -->
-    <section class="w-full px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8">
+    <section class="w-full px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8" data-aos="fade-up" data-aos-delay="300">
         <div class="space-y-1">
             <h4 class="text-4xl lg:text-3xl text-gray-800 font-sans font-bold">Nos rapports et publications</h4>
             <p class="text-xl text-gray-600">Rapport et publication</p>

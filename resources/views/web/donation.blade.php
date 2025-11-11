@@ -65,7 +65,7 @@
                             <span class="inline-block text-center text-xl font-bold">Orange Money</span>
                         </div>
                         <div class="text-2xl text-gray-500 font-bold text-center">
-                            +226 74 52 89 63
+                            +226 05 05 25 45 
                         </div>
                         <div class="w-full flex">
                             <a href="#" class="flex-shrink-0 rounded-full bg-white p-4 mx-auto">
@@ -90,9 +90,9 @@
 
                             <span class="inline-block text-center text-xl font-bold">Moov Money</span>
                         </div>
-                        <a href="#" class="text-2xl text-gray-500 font-bold text-center">
-                            +226 74 52 89 63
-                        </a>
+                        <div class="text-2xl text-gray-500 font-bold text-center">
+                            +226 52 57 92 34 
+                        </div>
                         <div class="w-full flex">
                             <a href="#" class="flex-shrink-0 rounded-full bg-white p-4 mx-auto">
                                 <svg class="w-6" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

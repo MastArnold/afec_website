@@ -3,16 +3,21 @@
 
     <x-slot name="header">
         <header class="w-full flex flex-col lg:flex-row justify-between items-center gap-2 bg-white px-8 lg:px-24 py-16 lg:py-32">
-            <div class="w-full lg:w-2/3">
+            <div class="w-full lg:w-2/3 space-y-6" data-aos="fade-right">
                 <div class="space-y-3">
                     <h1 class="text-gray-900 text-lg lg:text-2xl font-bold text-center lg:text-left">Association des Frères <br> des Écoles Chrétiennes</h1>
-                    <p class="text-gray-500 text-xl lg:text-5xl font-bold text-center lg:text-left">Nous intervenons <br> lorsque nous sommes appélés <br> dans la lumière de Dieu</p>
-                    <button class="hidden lg:inline-block px-4 py-2 bg-blue-800 text-white text-sm rounded-md">En savoir plus</button>
+                    <p class="text-gray-500 text-xl lg:text-5xl font-bold text-center lg:text-left">{{ $home["header"]["introduction"] }}</p>
                 </div>
+                <a href="#about" class="hidden lg:inline-block flex-shrink-0 group py-2 text-blue-800 bg-white text-sm font-bold rounded-md">
+                    En savoir plus
+                    <svg class="w-10 scale-100 group-hover:scale-125 origin-top transition-[transform] duration-300 mt-4 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M12.75 4C12.75 3.58579 12.4142 3.25 12 3.25C11.5858 3.25 11.25 3.58579 11.25 4L12.75 4ZM11.25 4L11.25 20H12.75L12.75 4L11.25 4Z" class="fill-blue-800"></path> <path d="M18 14L12 20L6 14" class="stroke-blue-800" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                </a>
             </div>
-            <div class="w-full lg:w-1/3 mt-8 lg:mt-0">
-                <div class="w-full aspect-9/16 lg:aspect-square rounded-xl overflow-hidden">
-                    <img class="w-full h-full object-cover object-top" src="{{ asset('storage/header-1.jpeg') }}" alt="Image de couverture">
+            <div class="w-full lg:w-1/3 mt-8 lg:mt-0" data-aos="fade-left">
+                <div id="hero-card" class="w-full aspect-9/16 lg:aspect-square 
+                                            bg-cover bg-center rounded-xl overflow-hidden" 
+                                    style="background-image: url('{{ asset($home['header']['image']) }}');">
+                    
                 </div>
             </div>
         </header>
@@ -20,22 +25,20 @@
 
     <!-- A Propos -->
     <section class="px-8 lg:px-32 py-6 lg:py-12" id="about">
-        <h4 class="text-xl lg:text-4xl text-gray-800 font-bold">Qui sommes nous ?</h4>
+        <h4 class="text-xl lg:text-4xl text-gray-800 font-bold" data-aos="fade-up">Qui sommes nous ?</h4>
 
         <div class="flex flex-col-reverse lg:flex-row justify-between gap-8 my-8">
-            <div class="w-full lg:w-1/3 flex flex-col items-center justify-center gap-4">
-                <img class="w-full h-full object-cover" src="{{ asset('storage/theme/2025.png') }}" alt="theme">
-                <span class="text-sm text-gray-900">Thème de l'année 2025</span>
+            <div class="w-full lg:w-1/3 flex flex-col items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <img class="w-full h-full object-cover" src="{{ asset($home['about']['theme']) }}" alt="theme">
+                <span class="text-sm text-gray-900">Thème de l'année {{ $home['about']['theme_year'] }}</span>
             </div>
-            <div class="w-full lg:w-1/2 space-y-4">
+            <div class="w-full lg:w-1/2 space-y-4" data-aos="fade-right">
                 <div class="space-y-2">
-                    <p class="leading-relaxed">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ex eligendi eos corporis magni et est accusantium impedit inventore? Ullam illo dolorem cupiditate ea nesciunt reprehenderit quisquam nemo, architecto quia?</p>
-                    <p>Lorem ipsum</p>
-                    <p>Lorem ipsum</p>
-                    <p>Lorem ipsum</p>
-                    <p class="leading-relaxed">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum maiores ut eligendi molestias adipisci fugit dicta sapiente harum, facere, aperiam nam quod ab alias saepe nostrum corrupti corporis dignissimos accusantium.</p>
+                    <p class="leading-relaxed">
+                        {!! $home['about']['us'] !!}
+                    </p>
                 </div>
-                <button class="px-4 py-2 bg-blue-800 text-white text-sm rounded-md mx-auto lg:mx-0">En savoir plus</button>
+                <a href="{{ route('web.about') }}" class="inline-block px-4 py-2 bg-blue-800 text-white text-sm rounded-md mx-auto lg:mx-0">En savoir plus</a>
             </div>
         </div>
     </section>
@@ -49,7 +52,7 @@
         <div class="relative z-10 text-center px-6 mx-auto">
             <p class="text-4xl font-bold mb-16 lg:mb-8 text-gray-700">Agir aujourd'hui <br> pour changer demain</p>
             
-            <a href="#" class="relative group inline-flex gap-4 items-center px-8 py-4 bg-gradient-to-r from-[#3658FA] to-[#FFBA6A] text-white text-xl rounded-md font-bold font-itim w-auto mx-auto">
+            <a href="{{ route('web.donation') }}" class="relative group inline-flex gap-4 items-center px-8 py-4 bg-gradient-to-r from-[#3658FA] to-[#FFBA6A] text-white text-xl rounded-md font-bold font-itim w-auto mx-auto">
                 <svg class="w-8 group-hover:scale-110 duration-150 transition[transform]" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_79_148)">
                     <path d="M0.343994 39.6609V22.0338H4.41179C5.15758 22.0338 5.76775 22.644 5.76775 23.3898V24.7457V34.2373V38.3051C5.76775 39.0509 5.15758 39.661 4.41179 39.661L0.343994 39.6609Z" fill="#FFD29D"/>
@@ -70,7 +73,7 @@
     </section>
 
     <!-- Actualités -->
-    <section class="relative w-full px-8 lg:px-32 py-6 lg:h-screen lg:py-12 lg:mb-12">
+    <section class="relative w-full px-8 lg:px-32 py-6 lg:h-screen lg:py-12 lg:mb-12" data-aos="fade-up">
         <h4 class="text-3xl text-gray-800 font-bold font-sans mb-4">Dernières actualités</h4>
 
         <div class="space-y-4 lg:space-y-0 lg:flex lg:gap-4 h-[calc(100%-3rem)]"> 
@@ -116,7 +119,7 @@
                     @endforeach
                 </div>
 
-                <a href="#" class="relative block group text-gray-600 text-md pb-4 my-2 mx-auto cursor-pointer">
+                <a href="{{ route('web.blog') }}" class="relative block group text-gray-600 text-md pb-4 my-2 mx-auto cursor-pointer">
                     <div class="grid place-items-center w-12 h-12 bg-white mx-auto rounded-full">
                         <svg class="w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 11L12 15M12 15L16 11M12 15V3M7 4.51555C4.58803 6.13007 3 8.87958 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 8.87958 19.412 6.13007 17 4.51555" class="stroke-gray-600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                     </div>

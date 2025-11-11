@@ -3,10 +3,10 @@
 
     <x-slot name="header">
         <header class="w-full flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 pt-24 lg:pt-48 pb-24">
-            <div class="w-2/3 lg:w-1/2 mx-auto lg:mx-0">
+            <div class="w-2/3 lg:w-1/2 mx-auto lg:mx-0" data-aos="fade-right" data-aos-delay="400">
                 @include("svg.domain.main-humaan")
             </div>
-            <div class="w-full lg:w-1/2 lg:px-8 space-y-6">
+            <div class="w-full lg:w-1/2 lg:px-8 space-y-6" data-aos="fade-left" data-aos-delay="400">
                 <h1 class="text-3xl lg:text-5xl text-gray-900 font-bold text-center lg:text-left">Là où nous intervenons</h1>
 
                 <p class="text-gray-700 text-lg/7 text-sm/7">
@@ -18,7 +18,7 @@
         </header>
     </x-slot>
 
-    <section class="w-full bg-gray-100 flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24">
+    <section class="w-full bg-gray-100 flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24" data-aos="fade-up" data-aos-delay="400">
         <div class="w-2/3 lg:w-1/3 mx-auto lg:mx-0">
             @include("svg.domain.education-humaan")
         </div>
@@ -33,7 +33,7 @@
         </div>
     </section>
 
-    <section class="w-full bg-white flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24">
+    <section class="w-full bg-white flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24" data-aos="fade-down" data-aos-delay="400">
         <div class="w-2/3 lg:w-1/3 mx-auto lg:mx-0">
             @include("svg.domain.teaching-humaan")
         </div>
@@ -48,7 +48,7 @@
         </div>
     </section>
 
-    <section class="w-full bg-gray-100 flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24">
+    <section class="w-full bg-gray-100 flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24" data-aos="fade-up" data-aos-delay="400">
         <div class="w-2/3 lg:w-1/3 mx-auto lg:mx-0">
             @include("svg.domain.course-humaan")
         </div>
@@ -63,7 +63,7 @@
         </div>
     </section>
 
-    <section class="w-full bg-white flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24">
+    <section class="w-full bg-white flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24" data-aos="fade-down" data-aos-delay="400">
         <div class="w-2/3 lg:w-1/3 mx-auto lg:mx-0">
             @include("svg.domain.development-humaan")
         </div>
@@ -78,7 +78,7 @@
         </div>
     </section>
 
-    <section class="w-full bg-gray-100 flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24">
+    <section class="w-full bg-gray-100 flex flex-col lg:flex-row justify-center gap-8 px-8 lg:px-32 py-12 lg:py-24" data-aos="fade-up" data-aos-delay="400">
         <div class="w-2/3 lg:w-1/3 mx-auto lg:mx-0">
             @include("svg.domain.child-protection-humaan")
         </div>
