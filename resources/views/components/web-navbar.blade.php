@@ -1,4 +1,4 @@
-<nav class="fixed left-0 right-0 bg-white">
+<nav class="fixed left-0 right-0 bg-white z-50">
     <div class="px-8 py-2 flex gap-2 justify-between items-center">
         <div class="brand">
             <a href="#" class="inline-block p-2 bg-white text-sm text-gray-800">Logo</a>
@@ -30,9 +30,9 @@
             ])
 
             @include('components.partials.web-navbar-item', [
-                'href' => route('web.domain'),
+                'href' => route('web.images'),
                 'text' => 'Galerie Image',
-                'active' => request()->routeIs('web.domain')
+                'active' => request()->routeIs('web.images')
             ])
 
             @include('components.partials.web-navbar-item', [
