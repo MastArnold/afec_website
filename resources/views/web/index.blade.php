@@ -14,7 +14,7 @@
                 </a>
             </div>
             <div class="w-full lg:w-1/3 mt-8 lg:mt-0" data-aos="fade-left">
-                <div id="hero-card" class="w-full aspect-9/16 lg:aspect-square 
+                <div id="hero-card" class="w-full aspect-[9/16] lg:aspect-square 
                                             bg-cover bg-center rounded-xl overflow-hidden" 
                                     style="background-image: url('{{ asset($home['header']['image']) }}');">
                     
