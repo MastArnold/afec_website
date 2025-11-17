@@ -1,0 +1,54 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AreaIntroController;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AboutGoalsController;
+use App\Http\Controllers\AboutValuesController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\BlogFileController;
+use App\Http\Controllers\ContactAddressController;
+use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\ContactSettingController;
+use App\Http\Controllers\ContactSocialController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\DonationBankController;
+use App\Http\Controllers\DonationMobileController;
+use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeCarouselController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ImageCategoryController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VideoCategoryController;
+
+Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
+    Route::apiResource('area-intros', AreaIntroController::class);
+    Route::apiResource('areas', AreaController::class);
+    Route::apiResource('abouts', AboutController::class);
+    Route::apiResource('about-goals', AboutGoalsController::class);
+    Route::apiResource('about-values', AboutValuesController::class);
+    Route::apiResource('blogs', BlogController::class);
+    Route::apiResource('blog-categories', BlogCategoryController::class);
+    Route::apiResource('blog-files', BlogFileController::class);
+    Route::apiResource('contact-addresses', ContactAddressController::class);
+    Route::apiResource('contact-messages', ContactMessageController::class);
+    Route::apiResource('contact-settings', ContactSettingController::class);
+    Route::apiResource('contact-socials', ContactSocialController::class);
+    Route::apiResource('donations', DonationController::class);
+    Route::apiResource('donation-banks', DonationBankController::class);
+    Route::apiResource('donation-mobiles', DonationMobileController::class);
+    Route::apiResource('generals', GeneralController::class);
+    Route::apiResource('homes', HomeController::class);
+    Route::apiResource('home-carousels', HomeCarouselController::class);
+    Route::apiResource('images', ImageController::class);
+    Route::apiResource('image-categories', ImageCategoryController::class);
+    Route::apiResource('partners', PartnerController::class);
+    Route::apiResource('teams', TeamController::class);
+    Route::apiResource('videos', VideoController::class);
+    Route::apiResource('video-categories', VideoCategoryController::class);
+});

@@ -1,7 +1,9 @@
 <nav x-data="{ opennav: false }" id="navbar" class="fixed left-0 right-0 bg-white z-50">
     <div class="px-8 py-2 flex gap-2 justify-between items-center">
         <div class="brand">
-            <a href="#" class="inline-block p-2 bg-white text-sm text-gray-800">Logo</a>
+            <a href="#" class="inline-block p-2 bg-white text-sm text-gray-800">
+                <img class="w-16 mx-auto" src="{{ asset('storage/logo.png') }}" alt="Logo">
+            </a>
         </div>
 
         <div class="hidden lg:block flex space-x-6 justify-end items-center">

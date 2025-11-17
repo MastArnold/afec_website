@@ -10,9 +10,11 @@
                 <h1 class="text-3xl lg:text-5xl text-gray-900 font-bold text-center lg:text-left">Là où nous intervenons</h1>
 
                 <p class="text-gray-700 text-lg/7 text-sm/7">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem illo odit nemo 
-                    ipsa aliquid fuga sunt, rerum, tenetur sed, delectus quo incidunt. Odit nulla sit 
-                    aperiam voluptatibus aspernatur officia voluptatum.
+                    Engagée aux côtés des communautés, l’AFEC œuvre pour renforcer 
+                    l’éducation, développer les compétences professionnelles, 
+                    promouvoir un développement durable et protéger les enfants. 
+                    À travers ses actions humanitaires et son soutien aux populations vulnérables, 
+                    l’ONG contribue à bâtir un Burkina Faso plus fort et plus solidaire
                 </p>
             </div>
         </header>
@@ -26,9 +28,10 @@
             <h1 class="text-2xl lg:text-3xl text-gray-800 font-medium text-center lg:text-left">Education</h1>
 
             <p class="text-gray-600 text-lg/7 text-sm/7">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem illo odit nemo 
-                ipsa aliquid fuga sunt, rerum, tenetur sed, delectus quo incidunt. Odit nulla sit 
-                aperiam voluptatibus aspernatur officia voluptatum.
+                L’AFEC offre une éducation de qualité aux enfants et aux jeunes, surtout à ceux issus de milieux 
+                défavorisés, afin de leur donner les mêmes chances de réussite. 
+                À travers un encadrement bienveillant, des outils pédagogiques adaptés et un soutien constant, 
+                l’ONG crée les conditions pour que chacun puisse apprendre, s’épanouir et bâtir son avenir.
             </p>
         </div>
     </section>
@@ -41,9 +44,9 @@
             <h1 class="text-2xl lg:text-3xl text-gray-800 font-medium text-center lg:text-left">Enseignement supérieur</h1>
 
             <p class="text-gray-600 text-lg/7 text-sm/7">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem illo odit nemo 
-                ipsa aliquid fuga sunt, rerum, tenetur sed, delectus quo incidunt. Odit nulla sit 
-                aperiam voluptatibus aspernatur officia voluptatum.
+                L’AFEC œuvre pour le développement de l’enseignement supérieur lasallien de qualité au Burkina Faso. 
+                Elle œuvre à rendre l’enseignement supérieur scientifique et technologique de qualité accessible aux 
+                filles et aux jeunes de familles modestes.
             </p>
         </div>
     </section>
@@ -56,9 +59,9 @@
             <h1 class="text-2xl lg:text-3xl text-gray-800 font-medium text-center lg:text-left">Fomation technique et professionnelle</h1>
 
             <p class="text-gray-600 text-lg/7 text-sm/7">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem illo odit nemo 
-                ipsa aliquid fuga sunt, rerum, tenetur sed, delectus quo incidunt. Odit nulla sit 
-                aperiam voluptatibus aspernatur officia voluptatum.
+                L’AFEC œuvre pour la sécurité alimentaire à travers formation agronomique, 
+                la mécanisation agricole, la production agro-pastorale et aquacole, 
+                la transformation des produits agro-pastoraux et la protection de l’environnement.
             </p>
         </div>
     </section>
@@ -71,9 +74,9 @@
             <h1 class="text-2xl lg:text-3xl text-gray-800 font-medium text-center lg:text-left">Développement durable</h1>
 
             <p class="text-gray-600 text-lg/7 text-sm/7">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem illo odit nemo 
-                ipsa aliquid fuga sunt, rerum, tenetur sed, delectus quo incidunt. Odit nulla sit 
-                aperiam voluptatibus aspernatur officia voluptatum.
+                L’AFEC œuvre pour la sécurité alimentaire à travers formation agronomique, 
+                la mécanisation agricole, la production agro-pastorale et aquacole, 
+                la transformation des produits agro-pastoraux et la protection de l’environnement.
             </p>
         </div>
     </section>
@@ -86,14 +89,15 @@
             <h1 class="text-2xl lg:text-3xl text-gray-800 font-medium text-center lg:text-left">Protection de l'enfant et action humanitaire</h1>
 
             <p class="text-gray-600 text-lg/7 text-sm/7">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem illo odit nemo 
-                ipsa aliquid fuga sunt, rerum, tenetur sed, delectus quo incidunt. Odit nulla sit 
-                aperiam voluptatibus aspernatur officia voluptatum.
+                L’AFEC assure à chaque structure d’éducation et de formation lasallienne 
+                un cadre favorisant la croissance intégrale et harmonieuse de l’enfant. 
+                L’AFEC est aussi solidaire avec les personnes déplacées internes et les
+                 ménages hôtes pour leur redonner sourire et espoir, et contribuer à un Burkina Faso résilient.
             </p>
         </div>
     </section>
 
-    <button class="fixed left-8 bottom-16 
+    <a href="{{ route('web.donation') }}" class="fixed left-8 bottom-16 
                 flex items-center justify-center 
                 bg-gradient-to-r from-[#3658FA] to-[#FFD29D] rounded-full p-4">
         <svg class="w-6" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,5 +113,5 @@
                 </clipPath>
             </defs>
         </svg>
-    </button>
+    </a>
 </x-web-layout>

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::name('web.')->group(function () {
     Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('home');
@@ -14,11 +16,24 @@ Route::name('web.')->group(function () {
     Route::get('/images', [App\Http\Controllers\WebController::class, 'images'])->name('images');
     Route::get('/contact', [App\Http\Controllers\WebController::class, 'contact'])->name('contact');
     Route::post('/contact', [App\Http\Controllers\WebController::class, 'contactSubmit'])->name('contact.submit');
+    Route::get('/default', [App\Http\Controllers\WebController::class, 'default'])->name('default');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.index');
+    })->name('admin.index');
+});
+
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/home', [AdminController::class, 'home'])->name('home');
+    
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

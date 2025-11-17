@@ -1,0 +1,47 @@
+<x-admin-layout>
+    <x-slot name="title">
+        {{ $title }}
+    </x-slot>
+
+    <x-slot name="subtitle">
+        {{ $subtitle }}
+    </x-slot>
+
+    <form class="space-y-4">
+        <div class="bg-yellow-50 p-3">
+            <p class="text-xs font-bold text-yellow-800">Dernière modification le x par y</p>
+        </div>
+        <div class="flex justify-end items-center gap-3 py-4">
+            <button class="text-sm font-medium px-3 py-2 bg-emerald-700 text-emerald-50 rounded cursor-pointer">Modifier</button>
+        </div>
+        <div class="space-y-4 mt-8">
+            <div class="w-full flex flex-col gap-1">
+                <label for="quote" class="text-xs text-gray-800 font-bold">Texte d'introduction</label>
+                <input type="text" id="quote" name="quote" value="{{ $home->quote }}" class="bg-gray-100 w-full text-sm text-gray-800 text-medium border border-transparent rounded-md">
+            </div>
+            <div class="w-full flex flex-col gap-1">
+                <label for="cover" class="text-xs text-gray-800 font-bold">Image de couverture</label>
+                <input type="file" id="cover" name="cover" class="hidden">
+                @include("components.admin-image-updater", [
+                    'src' => $home->cover ? asset($home->cover) : '', 
+                    'for' => 'cover',
+                    'width' => 'w-2/5',
+                    'ratio' => 'square'
+                ])
+            </div>
+            <div class="w-full flex flex-col gap-1">
+                <label for="about" class="text-xs text-gray-800 font-bold">Qui sommes nous ?</label>
+                <textarea name="about" id="about" rows="10" class="bg-gray-100 w-full text-sm text-gray-800 text-medium border border-transparent rounded-md">{{ $home->about }}</textarea>
+            </div>
+            <div class="w-full flex flex-col gap-1">
+                <label for="theme" class="text-xs text-gray-800 font-bold">Thème de l'année 2025</label>
+                <input type="file" id="theme" name="theme" class="hidden">
+                @include("components.admin-image-updater", [
+                    'src' => $home->theme ? asset($home->theme) : '', 
+                    'for' => 'theme',
+                    'ratio' => '0'
+                ])
+            </div>
+        </div>
+    </form>
+</x-admin-layout>

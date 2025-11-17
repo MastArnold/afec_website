@@ -3,10 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\AboutGoalsRepositoryInterface;
+use App\Repositories\Contracts\AboutRepositoryInterface;
+use App\Repositories\Contracts\AboutValuesRepositoryInterface;
+use App\Repositories\Contracts\TeamRepositoryInterface;
+use App\Repositories\Contracts\PartnerRepositoryInterface;
+use App\Repositories\Contracts\BlogRepositoryInterface;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
+    private AboutRepositoryInterface $aboutRepo;
+    private AboutGoalsRepositoryInterface $aboutGoalsRepo;
+    private AboutValuesRepositoryInterface $aboutValuesRepo;
+    private TeamRepositoryInterface $teamRepo;
+    private PartnerRepositoryInterface $partnerRepo;
+    private BlogRepositoryInterface $blogRepo;
+    // Meta
     private $meta = [
         'description' => '',
         'keywords' => '',
@@ -19,9 +32,21 @@ class WebController extends Controller
         'locale_alternate' => ''
     ];
 
-    public function __construct()
+    public function __construct(
+        AboutRepositoryInterface $aboutRepo,
+        AboutGoalsRepositoryInterface $aboutGoalsRepo,
+        AboutValuesRepositoryInterface $aboutValuesRepo,
+        TeamRepositoryInterface $teamRepo,
+        PartnerRepositoryInterface $partnerRepo,
+        BlogRepositoryInterface $blogRepo
+    )
     {
-        
+        $this->aboutRepo = $aboutRepo;
+        $this->aboutGoalsRepo = $aboutGoalsRepo;
+        $this->aboutValuesRepo = $aboutValuesRepo;
+        $this->teamRepo = $teamRepo;
+        $this->partnerRepo = $partnerRepo;
+        $this->blogRepo = $blogRepo;
     }
 
     public function index(){
@@ -60,9 +85,82 @@ class WebController extends Controller
     }
 
     public function about(){
+        $about = $this->aboutRepo->all() ? $this->aboutRepo->all()->first() : null;
+
+        if($about == null)
+            return redirect()->route('web.contact');
+
+        $introduction = [
+            "
+                L'ONG « Association Frères des Écoles Chrétiennes (AFEC) » est une organisation à but 
+                non lucratif créée en 1981 et légalement reconnue par l'Etat Burkinabè. Elle intervient 
+                dans les domaines de l’éducation de qualité à travers un réseau d’écoles primaires et secondaires ; 
+                de l’enseignement supérieur ; de la formation technique et professionnelle ; du développement rural ; 
+                de la protection des enfants et de l’action humanitaire au Burkina Faso.
+            ",
+            "
+                L'AFEC est le principal instrument de collecte de fonds des Frères des Écoles Chrétiennes 
+                au Burkina Faso pour soutenir l'éducation des enfants et la formation des jeunes, surtout 
+                les plus vulnérables. Et le Bureau de Développement et de Solidarité qui est l’organe exécutif 
+                de l’AFEC, a la charge de la planification des projets, de la mobilisation des ressources, de 
+                l’exécution et du rapportage des projets. Ce bureau coordonne de ce fait toutes les activités 
+                entrant dans le cadre des différents projets de l’AFEC. Le Bureau de Développement et de Solidarité 
+                de l’AFEC, mis en place en 2019, mène des actions de solidarité en faveur des plus démunis au 
+                Burkina Faso.
+            "
+        ];
+        $cover1 = $about->cover_1;
+        $cover2 = $about->cover_2;
+        $cover3 = $about->cover_3;
+        $cover4 = $about->cover_4;
+        $mission = [
+            "
+            -	Contribuer au développement durable par l'éducation des enfants et la formation des jeunes vulnérables
+            ",
+            "
+            -	Promouvoir des activités parascolaires, écocitoyennes et l'action humanitaire
+            ",
+            "
+            -	Assurer au réseau « La Salle » du Burkina les infrastructures scolaires, les équipements, le renforcement des capacités, les bourses d'études pour une éducation de qualité.
+            "
+        ];
+        $goals = $this->aboutGoalsRepo->all();
+        $transition = $about->transition_image;
+        $value_sub_title = "Sous Titre";
+        $values = $this->aboutValuesRepo->all();
+        #
+        $partner_text = "Nos Partenaires nous font confiance";
+        $partners = $this->partnerRepo->all();
+        #
+        $team_text = "Sous Titre";
+        $teams = $this->teamRepo->all();
+        #
+        $blog_text = "Sous Titre";
+        $blogs = $this->blogRepo->all();
+
+        $abt = [
+            'introduction' => $introduction,
+            'cover1' => $cover1,
+            'cover2' => $cover2,
+            'cover3' => $cover3,
+            'cover4' => $cover4,
+            'mission' => $mission,
+            'goals' => $goals,
+            'transition' => $transition,
+            'value_sub_title' => $value_sub_title,
+            'values' => $values,
+            'partner_text' => $partner_text,
+            'partners' => $partners,
+            'team_text' => $team_text,
+            'teams' => $teams,
+            'blog_text' => $blog_text,
+            'blogs' => $blogs
+        ];
+
         return view('web.about', [
             'title' => 'AFEC - A Propos de nous',
-            'meta' => $this->meta
+            'meta' => $this->meta,
+            'about' => $abt
         ]);
     }
 
@@ -147,6 +245,13 @@ class WebController extends Controller
             'title' => 'AFEC - Contact',
             'meta' => $this->meta,
             'contact' => $contact
+        ]);
+    }
+
+    public function default(){
+        return view('admin.default', [
+            'title' => 'AFEC',
+            'meta' => $this->meta
         ]);
     }
 }
