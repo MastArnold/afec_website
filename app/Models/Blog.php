@@ -15,6 +15,7 @@ class Blog extends Model
         'title',
         'content',
         'is_public',
+        'is_featured',
         'category_id',
         'created_by',
         'updated_by',

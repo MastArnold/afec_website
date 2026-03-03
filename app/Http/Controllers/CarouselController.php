@@ -24,6 +24,16 @@ class CarouselController extends Controller
         $data = $request->all();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'carousel_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/carousels', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['image'] = asset('storage/' . $path);
+        }
         $created = $this->blogs->create($data);
         return response()->json($created, 201);
     }

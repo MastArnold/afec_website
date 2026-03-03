@@ -45,6 +45,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->boolean('is_public');
+            $table->boolean('is_featured');
             $table->foreignId('category_id')->nullable();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();

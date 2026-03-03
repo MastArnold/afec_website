@@ -25,6 +25,18 @@ class BlogController extends Controller
         $data = $request->all();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+        //store the cover
+        if ($request->hasFile('cover')) {
+            $image = $request->file('cover');
+            $imageName = 'blog_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/blog', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['cover'] = asset('storage/' . $path);
+        }
+
         $created = $this->blogs->create($data);
         return response()->json($created, 201);
     }

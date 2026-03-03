@@ -25,7 +25,14 @@ class ImageController extends Controller
         $data['updated_by'] = Auth::id();
         //store the image
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('public');
+            $image = $request->file('image');
+            $imageName = 'image_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/images', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['image'] = asset('storage/' . $path);
         }
 
         $created = $this->images->create($data);
