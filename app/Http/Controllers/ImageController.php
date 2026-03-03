@@ -13,9 +13,10 @@ class ImageController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->images->all());
+        $size = $request->query('per_page', 10);
+        return response()->json($this->images->allDateOrder());
     }
 
     public function store(Request $request): JsonResponse
@@ -23,6 +24,7 @@ class ImageController extends Controller
         $data = $request->all();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+        $data['date'] = now();
         //store the image
         if ($request->hasFile('image')) {
             $image = $request->file('image');

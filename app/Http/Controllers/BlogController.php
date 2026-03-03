@@ -37,6 +37,18 @@ class BlogController extends Controller
             $data['cover'] = asset('storage/' . $path);
         }
 
+        //store files
+        if ($request->hasFile('files')) {
+            $files = $request->file('files');
+            $fileNames = [];
+            foreach ($files as $file) {
+                $fileName = 'blog_file_' . time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('data/blog_file', $fileName, 'public');
+                $fileNames[] = asset('storage/' . $path);
+            }
+            $data['files'] = $fileNames;
+        }
+
         $created = $this->blogs->create($data);
         return response()->json($created, 201);
     }

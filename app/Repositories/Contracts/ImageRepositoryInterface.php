@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface ImageRepositoryInterface extends BaseRepositoryInterface
 {
+    public function allDateOrder(): \Illuminate\Pagination\LengthAwarePaginator;
+
     public function publicOnly(): Collection;
 
     public function byCategory(int $categoryId): Collection;

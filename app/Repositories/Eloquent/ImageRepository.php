@@ -14,9 +14,14 @@ class ImageRepository extends BaseRepository implements ImageRepositoryInterface
         parent::__construct($model);
     }
 
+    public function allDateOrder() : \Illuminate\Pagination\LengthAwarePaginator
+    {
+        return $this->model->newQuery()->orderByDesc('date')->paginate(10);
+    }
+
     public function publicOnly(): Collection
     {
-        return $this->model->newQuery()->where('is_public', true)->get();
+        return $this->model->newQuery()->orderByDesc('date')->where('is_public', true)->get();
     }
 
     public function byCategory(int $categoryId): Collection
