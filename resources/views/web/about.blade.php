@@ -2,7 +2,7 @@
     <x-slot name="title" :title="$title"></x-slot>
 
     <x-slot name="header">
-        <header class="relative w-full flex flex-col lg:flex-row justify-between gap-4 bg-white px-8 lg:px-24 pt-32 pb-8 lg:pt-32 lg:pb-32">
+        <header id="header" class="relative w-full flex flex-col lg:flex-row justify-between gap-4 bg-white px-8 lg:px-24 pt-32 pb-8 lg:pt-32 lg:pb-32">
             <div class="w-full lg:w-3/5" data-aos="fade-up" data-aos-delay="200">
                 <div class="space-y-8 lg:space-y-16">
                     <h1 class="text-gray-900 text-3xl lg:text-6xl font-bold font-sans text-center lg:text-left">Qui nous sommes, <br> notre mission, <br> nos valeurs...</h1>
@@ -29,7 +29,7 @@
     </x-slot>
     
     <!-- Mission -->
-    <section class="w-full px-8 lg:px-32 py-8 lg:py-16" data-aos="fade-up" data-aos-delay="300">
+    <section id="mission" class="w-full px-8 lg:px-32 py-8 lg:py-16" data-aos="fade-up" data-aos-delay="300">
         <h1 class="text-4xl lg:text-3xl text-center lg:text-left text-gray-600 font-bold">Notre mission</h1>
 
         <div class="w-full flex flex-col-reverse lg:flex-row justify-between py-8 lg:py-12">
@@ -50,11 +50,11 @@
     </section>
 
     <!-- Transition -->
-    <section class="w-full h-[30vh] lg:h-[50vh] bg-cover bg-center bg-fixed" style="background-image: url('{{ asset($about['transition']) }}');">
+    <section id="transition" class="w-full h-[30vh] lg:h-[50vh] bg-cover bg-center bg-fixed" style="background-image: url('{{ asset($about['transition']) }}');">
     </section>
 
     <!-- Valeurs -->
-    <section class="px-8 lg:px-32 py-8 lg:py-16 space-y-8">
+    <section id="values" class="px-8 lg:px-32 py-8 lg:py-16 space-y-8">
         <div data-aos="fade-up">
             <h4 class="text-3xl lg:text-3xl text-gray-800 font-bold font-sans">Nos valeurs</h4>
             <p class="text-xl text-gray-600">{{ $about['value_sub_title'] }}</p>
@@ -76,7 +76,7 @@
     </section>
 
     <!-- Partenaires -->
-    <section class="relative w-full lg:min-h-[70vh] px-8 lg:px-32 bg-cover bg-center" data-aos="fade-down" data-aos-delay="300"
+    <section id="partners" class="relative w-full lg:min-h-[70vh] px-8 lg:px-32 bg-cover bg-center" data-aos="fade-down" data-aos-delay="300"
             style="background-image: url('https://images.unsplash.com/photo-1558522195-e1201b090344?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGFydG5lcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600'); background-size: cover; background-position: center;">
         <div class="py-12 space-y-8 lg:space-y-16">        
             <h4 class="relative z-10 text-2xl lg:text-3xl text-gray-800 font-bold text-center">{{ $about['partner_text'] }}</h4>
@@ -94,7 +94,7 @@
     </section>
 
     <!-- Equipe -->
-    <section class="px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8" data-aos="fade-up" data-aos-delay="300">
+    <section id="team" class="px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8" data-aos="fade-up" data-aos-delay="300">
         <div class="space-y-1 mb-12 lg:mb-0">
             <h4 class="text-4xl lg:text-3xl text-gray-800 font-sans font-bold">Notre équpe</h4>
             <p class="text-xl text-gray-600">{{ $about['team_text'] }}</p>
@@ -117,7 +117,7 @@
     </section>
 
     <!-- Rapport et publication -->
-    <section class="w-full px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8" data-aos="fade-up" data-aos-delay="300">
+    <section id="blog" class="w-full px-8 lg:px-32 py-8 lg:py-16 space-y-4 lg:space-y-8" data-aos="fade-up" data-aos-delay="300">
         <div class="space-y-1">
             <h4 class="text-4xl lg:text-3xl text-gray-800 font-sans font-bold">Nos rapports et publications</h4>
             <p class="text-xl text-gray-600">{{ $about['blog_text'] }}</p>

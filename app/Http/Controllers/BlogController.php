@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Repositories\Contracts\BlogRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -13,9 +14,10 @@ class BlogController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request)
     {
-        return response()->json($this->blogs->all());
+        $size = $request->query('per_page', 10);
+        return response()->json(Blog::paginate($size));
     }
 
     public function store(Request $request): JsonResponse

@@ -2,22 +2,48 @@
     <x-slot name="title" :title="$title"></x-slot>
 
     <x-slot name="header">
-        <header class="w-full flex flex-col lg:flex-row justify-between items-center gap-2 bg-white px-8 lg:px-24 py-16 lg:py-32">
-            <div class="w-full lg:w-2/3 space-y-6" data-aos="fade-right">
-                <div class="space-y-3">
-                    <h1 class="text-gray-900 text-lg lg:text-2xl font-bold text-center lg:text-left">Association des Frères <br> des Écoles Chrétiennes</h1>
-                    <p class="text-gray-500 text-xl lg:text-5xl font-bold text-center lg:text-left">{{ $home["header"]["introduction"] }}</p>
+        <header class="w-full bg-white px-8 lg:px-24 py-16 lg:py-32">
+            <!--HEADER 1-->
+            <div class="hidden flex flex-col lg:flex-row justify-between items-center gap-2">
+                <div class="w-full lg:w-2/3 space-y-6" data-aos="fade-right">
+                    <div class="space-y-3">
+                        <h1 class="text-gray-900 text-lg lg:text-2xl font-bold text-center lg:text-left">Association des Frères <br> des Écoles Chrétiennes</h1>
+                        <p class="text-gray-500 text-xl lg:text-5xl font-bold text-center lg:text-left">{{ $home["header"]["introduction"] }}</p>
+                    </div>
+                    <a href="#about" class="hidden lg:inline-block flex-shrink-0 group py-2 text-blue-800 bg-white text-sm font-bold rounded-md">
+                        En savoir plus
+                        <svg class="w-10 scale-100 group-hover:scale-125 origin-top transition-[transform] duration-300 mt-4 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M12.75 4C12.75 3.58579 12.4142 3.25 12 3.25C11.5858 3.25 11.25 3.58579 11.25 4L12.75 4ZM11.25 4L11.25 20H12.75L12.75 4L11.25 4Z" class="fill-blue-800"></path> <path d="M18 14L12 20L6 14" class="stroke-blue-800" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    </a>
                 </div>
-                <a href="#about" class="hidden lg:inline-block flex-shrink-0 group py-2 text-blue-800 bg-white text-sm font-bold rounded-md">
-                    En savoir plus
-                    <svg class="w-10 scale-100 group-hover:scale-125 origin-top transition-[transform] duration-300 mt-4 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M12.75 4C12.75 3.58579 12.4142 3.25 12 3.25C11.5858 3.25 11.25 3.58579 11.25 4L12.75 4ZM11.25 4L11.25 20H12.75L12.75 4L11.25 4Z" class="fill-blue-800"></path> <path d="M18 14L12 20L6 14" class="stroke-blue-800" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                </a>
+                <div class="w-full lg:w-1/3 mt-8 lg:mt-0" data-aos="fade-left">
+                    <div id="hero-card" class="w-full aspect-[9/16] lg:aspect-square 
+                                                bg-cover bg-center rounded-xl overflow-hidden" 
+                                        style="background-image: url('{{ asset($home['header']['image']) }}');">
+                        
+                    </div>
+                </div>
             </div>
-            <div class="w-full lg:w-1/3 mt-8 lg:mt-0" data-aos="fade-left">
-                <div id="hero-card" class="w-full aspect-[9/16] lg:aspect-square 
-                                            bg-cover bg-center rounded-xl overflow-hidden" 
-                                    style="background-image: url('{{ asset($home['header']['image']) }}');">
+
+            <!--HEADER 2-->
+            <div class="relative group grid place-items-center gap-2">
+                <!--PANNEAU D'IMAGE-->
+                <div class="absolute inset-0 -z-10 bg-black/30">
                     
+                </div>
+                
+                <!--TEXTES-->
+                <div class="space-y-12">
+                    <div class="space-y-2">
+                        <div class="flex justify-center items-center gap-3">
+                            <span class="text-7xl font-bold text-blue-800 trantion-[transform] duration-[800ms]">A</span>
+                            <span class="text-7xl font-bold text-blue-800">F</span>
+                            <span class="text-7xl font-bold text-blue-800">E</span>
+                            <span class="text-7xl font-bold text-blue-800">C</span>
+                        </div>
+                        <h2 class="text-center text-md text-gray-700 font-medium">Association des frères des écoles chrétiennes</h2>
+                    </div>
+                    <p class="text-center text-xl text-gray-600">Nous sommes toujours quand il faut ou il faut mgl</p>
+                    <button class="text-center">En savoir plus</button>
                 </div>
             </div>
         </header>

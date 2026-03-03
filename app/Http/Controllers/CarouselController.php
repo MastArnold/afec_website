@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Contracts\BlogFileRepositoryInterface;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\CarouselRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BlogFileController extends Controller
+class CarouselController extends Controller
 {
-    public function __construct(private BlogFileRepositoryInterface $blogFiles)
+    public function __construct(private CarouselRepositoryInterface $blogs)
     {
     }
 
     public function index(): JsonResponse
     {
-        return response()->json($this->blogFiles->all());
+        return response()->json($this->blogs->all());
     }
 
     public function store(Request $request): JsonResponse
@@ -23,32 +24,26 @@ class BlogFileController extends Controller
         $data = $request->all();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
-
-        //store file
-        if ($request->hasFile('file')) {
-            $data['file'] = $request->file('file')->store('public');
-        }
-
-        $created = $this->blogFiles->create($data);
+        $created = $this->blogs->create($data);
         return response()->json($created, 201);
     }
 
     public function show(int $id): JsonResponse
     {
-        return response()->json($this->blogFiles->find($id));
+        return response()->json($this->blogs->find($id));
     }
 
     public function update(Request $request, int $id): JsonResponse
     {
         $data = $request->all();
         $data['updated_by'] = Auth::id();
-        $updated = $this->blogFiles->update($id, $data);
+        $updated = $this->blogs->update($id, $data);
         return response()->json($updated);
     }
 
     public function destroy(int $id): JsonResponse
     {
-        $this->blogFiles->delete($id);
+        $this->blogs->delete($id);
         return response()->json(null, 204);
     }
 }

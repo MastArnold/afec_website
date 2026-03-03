@@ -1,8 +1,8 @@
-<nav x-data="{ opennav: false }" id="navbar" class="fixed left-0 right-0 bg-white z-50">
+<!--nav x-data="{ opennav: false }" id="navbar" class="fixed left-0 right-0 bg-white z-50">
     <div class="px-8 py-2 flex gap-2 justify-between items-center">
         <div class="brand">
             <a href="#" class="inline-block p-2 bg-white text-sm text-gray-800">
-                <img class="w-16 mx-auto" src="{{ asset('storage/logo.png') }}" alt="Logo">
+                <img id="brand" class="w-20 mx-auto transition duration-300 ease-in-out" src="{{ asset('storage/logo.png') }}" alt="Logo">
             </a>
         </div>
 
@@ -13,11 +13,21 @@
                 'active' => request()->routeIs('web.home')
             ])
 
-            @include('components.partials.web-navbar-item', [
-                'href' => route('web.about'),
-                'text' => 'A Propos',
-                'active' => request()->routeIs('web.about')
-            ])
+            <div class="group relative inline-block bg-white">
+                 @include('components.partials.web-navbar-item', [
+                    'href' => route('web.about'),
+                    'text' => 'A Propos',
+                    'active' => request()->routeIs('web.about')
+                ])
+
+                <ul class="py-2 w-48 absolute bottom-0 -z-10 opacity-0 translate-y-0 flex flex-col gap-1
+                            origin-top group-hover:opacity-100 group-hover:translate-y-full transition-all duration-[.4s] ease-in-out">
+                    <a href="{{ route('web.about') }}#header" class="bg-white px-2 py-3 rounded-2xl border border-blue-800 text-sm font-medium text-gray-600 hover:bg-gray-50 cursor-pointer">Qui nous sommes</a>
+                    <a href="{{ route('web.about') }}#mission" class="bg-white px-2 py-3 rounded-2xl border border-blue-800 text-sm font-medium text-gray-600 hover:bg-gray-50 cursor-pointer">Notre mission</a>
+                    <a href="{{ route('web.about') }}#partners" class="bg-white px-2 py-3 rounded-2xl border border-blue-800 text-sm font-medium text-gray-600 hover:bg-gray-50 cursor-pointer">Nos Partenaires</a>
+                    <a href="{{ route('web.about') }}#team" class="bg-white px-2 py-3 rounded-2xl border border-blue-800 text-sm font-medium text-gray-600 hover:bg-gray-50 cursor-pointer">Notre Equipe</a>
+                </ul>
+            </div>
 
             @include('components.partials.web-navbar-item', [
                 'href' => route('web.blog'),
@@ -110,4 +120,5 @@
             </div>
         </div>
     </div>
-</nav>
+</!--nav-->
+

@@ -9,6 +9,7 @@ use App\Http\Controllers\AboutValuesController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogFileController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\ContactAddressController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\ContactSettingController;
@@ -26,7 +27,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VideoCategoryController;
 
-Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
+Route::name('api.')->group(function () {
     Route::apiResource('area-intros', AreaIntroController::class);
     Route::apiResource('areas', AreaController::class);
     Route::apiResource('abouts', AboutController::class);
@@ -45,6 +46,7 @@ Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
     Route::apiResource('generals', GeneralController::class);
     Route::apiResource('homes', HomeController::class);
     Route::apiResource('home-carousels', HomeCarouselController::class);
+    Route::apiResource('carousels', CarouselController::class);
     Route::apiResource('images', ImageController::class);
     Route::apiResource('image-categories', ImageCategoryController::class);
     Route::apiResource('partners', PartnerController::class);

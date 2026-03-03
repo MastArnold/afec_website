@@ -43,7 +43,7 @@ return new class extends Migration
             $table->string('author')->nullable();
             $table->timestamp('date');
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->boolean('is_public');
             $table->foreignId('category_id')->nullable();
             $table->foreignId('created_by')->nullable();
@@ -63,12 +63,24 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('carousels', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('sub_title')->nullable();
+            $table->string('link')->nullable();
+            $table->text('description');
+            $table->string('image');
+            $table->foreignId('created_by')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('blog_id')->nullable();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('url');
+            $table->string('image');
             $table->timestamp('date');
             $table->foreignId('category_id')->nullable();
             $table->boolean('is_public')->nullable();

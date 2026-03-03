@@ -23,6 +23,11 @@ class ImageController extends Controller
         $data = $request->all();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+        //store the image
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('public');
+        }
+
         $created = $this->images->create($data);
         return response()->json($created, 201);
     }
