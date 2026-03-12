@@ -13,9 +13,10 @@ class ContactSettingController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->contactSettings->all());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->contactSettings->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse

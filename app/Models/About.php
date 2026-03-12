@@ -6,24 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class About extends Model
 {
-    //
+    protected $table = 'abouts';
 
     protected $fillable = [
-        'introduction',
-        'cover_1',
-        'cover_2',
-        'cover_3',
-        'cover_4',
-        'mission',
-        'transition_image',
-        'created_by',
-        'updated_by',
+        'title',
+        'content',
+        'updated_by'
     ];
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
 
     public function updater()
     {

@@ -23,10 +23,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@afec.cloud',
             'password' => Hash::make('12345'),
         ]);
-
-        $this->call([
-            AboutSeeder::class,
-            HomeSeeder::class,
-        ]);
     }
 }

@@ -9,11 +9,11 @@ class Home extends Model
     //
 
     protected $fillable = [
-        'quote',
-        'cover',
-        'about',
-        'theme',
-        'theme_year',
+        'title',
+        'subtitle',
+        'content',
+        'image',
+        'is_active',
         'created_by',
         'updated_by',
     ];

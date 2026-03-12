@@ -13,9 +13,10 @@ class VideoCategoryController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->videoCategories->all());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->videoCategories->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse

@@ -19,11 +19,6 @@ class CarouselRepository extends BaseRepository implements CarouselRepositoryInt
         return $this->model->newQuery()->where('is_public', true)->get();
     }
 
-    public function byCategory(string $category): Collection
-    {
-        return $this->model->newQuery()->where('category', $category)->get();
-    }
-
     public function forPagePublic(int $perPage = 15): LengthAwarePaginator
     {
         return $this->model->newQuery()->where('is_public', true)->orderByDesc('date')->paginate($perPage);

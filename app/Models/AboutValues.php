@@ -9,10 +9,10 @@ class AboutValues extends Model
     //
 
     protected $fillable = [
-        'icon',
-        'name',
-        'quote',
-        'is_public',
+        'ico',
+        'title',
+        'content',
+        'is_active',
         'created_by',
         'updated_by',
     ];

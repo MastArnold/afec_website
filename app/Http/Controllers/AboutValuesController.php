@@ -13,9 +13,10 @@ class AboutValuesController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->aboutValues->all());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->aboutValues->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse

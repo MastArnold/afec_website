@@ -13,9 +13,10 @@ class HomeCarouselController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->homeCarousels->all());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->homeCarousels->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse

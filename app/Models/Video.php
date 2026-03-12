@@ -9,11 +9,12 @@ class Video extends Model
     //
 
     protected $fillable = [
-        'blog_id',
         'title',
         'description',
         'url',
+        'thumbnail',
         'date',
+        'duration',
         'category_id',
         'is_public',
         'created_by',

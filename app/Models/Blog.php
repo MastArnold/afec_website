@@ -12,6 +12,7 @@ class Blog extends Model
         'cover',
         'author',
         'date',
+        'planned_date',
         'title',
         'content',
         'is_public',

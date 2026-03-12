@@ -13,9 +13,10 @@ class HomeController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->homes->all());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->homes->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse
@@ -23,6 +24,19 @@ class HomeController extends Controller
         $data = $request->all();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+        //store the image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'theme_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/themes', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['image'] = asset('storage/' . $path);
+        }
+
+
         $created = $this->homes->create($data);
         return response()->json($created, 201);
     }
@@ -36,8 +50,40 @@ class HomeController extends Controller
     {
         $data = $request->all();
         $data['updated_by'] = Auth::id();
+        if ($request->hasFile('image')) {
+
+            //delete the current image
+            $home = $this->homes->find($id);
+            $imagePath = public_path($home->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            $image = $request->file('image');
+            $imageName = 'theme_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/themes', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['image'] = asset('storage/' . $path);
+        }
+
         $updated = $this->homes->update($id, $data);
         return response()->json($updated);
+    }
+
+    public function patchActive(int $id): JsonResponse
+    {
+        $home = $this->homes->find($id);
+        if($home){
+            $this->homes->unactiveCurrent();
+            $home->is_active = true;
+            $home->save();
+            return response()->json($home);
+        }
+
+        return response()->json(null, 404);
     }
 
     public function destroy(int $id): JsonResponse

@@ -10,8 +10,10 @@ class Carousel extends Model
         'title',
         'sub_title',
         'description',
+        'cta',
         'image',
         'link',
+        'order',
         'created_by',
         'updated_by',
     ];

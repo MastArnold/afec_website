@@ -13,9 +13,10 @@ class PartnerController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->partners->all());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->partners->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse
@@ -23,6 +24,18 @@ class PartnerController extends Controller
         $data = $request->all();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+        //store the logo
+        if ($request->hasFile('logo')) {
+            $image = $request->file('logo');
+            $imageName = 'partner_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/partners', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['logo'] = asset('storage/' . $path);
+        }
+        
         $created = $this->partners->create($data);
         return response()->json($created, 201);
     }
@@ -36,12 +49,38 @@ class PartnerController extends Controller
     {
         $data = $request->all();
         $data['updated_by'] = Auth::id();
+        //store the logo
+        if ($request->hasFile('logo')) {
+            //delete the current image if it exists
+            $image = $this->partners->find($id);
+            $imagePath = public_path($image->logo);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        
+            $image = $request->file('logo');
+            $imageName = 'partner_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/partners', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['logo'] = asset('storage/' . $path);
+        }
+
         $updated = $this->partners->update($id, $data);
         return response()->json($updated);
     }
 
     public function destroy(int $id): JsonResponse
     {
+        //delete the image if it exists
+        $partner = $this->partners->find($id);
+        $imagePath = public_path($partner->logo);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
         $this->partners->delete($id);
         return response()->json(null, 204);
     }

@@ -11,4 +11,12 @@ class HomeRepository extends BaseRepository implements HomeRepositoryInterface
     {
         parent::__construct($model);
     }
+
+    public function activeOnly() : Home{
+        return $this->model->where('is_active', true)->first();
+    }
+
+    public function unactiveCurrent() : bool{
+        return $this->model->where('is_active', true)->update(['is_active' => false]);
+    }
 }

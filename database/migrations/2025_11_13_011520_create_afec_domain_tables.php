@@ -42,6 +42,7 @@ return new class extends Migration
             $table->string('cover');
             $table->string('author')->nullable();
             $table->timestamp('date');
+            $table->timestamp('planned_date')->nullable();
             $table->string('title');
             $table->text('content');
             $table->boolean('is_public');
@@ -70,7 +71,9 @@ return new class extends Migration
             $table->string('sub_title')->nullable();
             $table->string('link')->nullable();
             $table->text('description');
+            $table->string('cta');
             $table->string('image');
+            $table->integer('order');
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
@@ -92,10 +95,11 @@ return new class extends Migration
 
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('blog_id')->nullable();
             $table->string('title');
             $table->string('description');
             $table->string('url');
+            $table->string('thumbnail');
+            $table->string('duration');
             $table->timestamp('date');
             $table->foreignId('category_id');
             $table->boolean('is_public');
@@ -143,33 +147,26 @@ return new class extends Migration
 
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->text('introduction')->nullable();
-            $table->string('cover_1')->nullable();
-            $table->string('cover_2')->nullable();
-            $table->string('cover_3')->nullable();
-            $table->string('cover_4')->nullable();
-            $table->text('mission')->nullable();
-            $table->string('transition_image')->nullable();
-            $table->foreignId('created_by')->nullable();
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('about_goals', function (Blueprint $table) {
+        Schema::create('about_mission', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('value');
-            $table->foreignId('created_by')->nullable();
+            $table->text('content')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
         });
 
         Schema::create('about_values', function (Blueprint $table) {
             $table->id();
-            $table->string('icon')->nullable();
-            $table->string('name');
-            $table->string('quote');
-            $table->boolean('is_public')->nullable();
+            $table->string('ico')->nullable();
+            $table->string('title');
+            $table->string('content');
+            $table->boolean('is_active')->nullable();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
@@ -179,8 +176,8 @@ return new class extends Migration
             $table->id();
             $table->string('logo');
             $table->string('name');
-            $table->string('url')->nullable();
-            $table->boolean('is_public')->nullable();
+            $table->string('link')->nullable();
+            $table->boolean('is_active')->nullable();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
@@ -190,6 +187,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('role');
+            $table->string('department');
+            $table->integer('order');
             $table->string('photo')->nullable();
             $table->boolean('is_public')->nullable();
             $table->foreignId('created_by')->nullable();
@@ -197,23 +196,36 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('donation_banks', function (Blueprint $table) {
+        Schema::create('donation_iban_details', function (Blueprint $table) {
             $table->id();
-            $table->string('transfert_name')->nullable();
-            $table->string('transfert_no')->nullable();
+            $table->foreignId('donation_method_id');
+            $table->string('label');
+            $table->string('detail');
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('donation_mobiles', function (Blueprint $table) {
+        Schema::create('donation_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
-            $table->string('code')->nullable();
-            $table->boolean('is_public')->default(true);
+            $table->string('tagline');
+            $table->string('initials')->nullable();
+            $table->string('color'); //code couleur tailwind : red | orange | blue | ... etc
+            $table->string('field');
+            $table->string('value');
+            $table->string('copy_value')->nullable();
+            $table->string('note')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('donation_method_steps', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('donation_method_id');
+            $table->string('content');
             $table->timestamps();
         });
 
@@ -227,11 +239,11 @@ return new class extends Migration
 
         Schema::create('homes', function (Blueprint $table) {
             $table->id();
-            $table->string('quote')->nullable();
-            $table->string('cover')->nullable();
-            $table->text('about')->nullable();
-            $table->string('theme')->nullable();
-            $table->string('theme_year')->nullable();
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->text('content')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('is_active')->default(false);
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
@@ -285,7 +297,6 @@ return new class extends Migration
         });
 
         Schema::table('videos', function (Blueprint $table) {
-            $table->foreign('blog_id')->references('id')->on('blogs')->restrictOnDelete();
             $table->foreign('category_id')->references('id')->on('video_categories')->restrictOnDelete();
             $table->foreign('created_by')->references('id')->on('users')->restrictOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->restrictOnDelete();
@@ -307,12 +318,6 @@ return new class extends Migration
         });
 
         Schema::table('abouts', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('users')->restrictOnDelete();
-            $table->foreign('updated_by')->references('id')->on('users')->restrictOnDelete();
-        });
-
-        Schema::table('about_goals', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('users')->restrictOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->restrictOnDelete();
         });
 
@@ -331,14 +336,19 @@ return new class extends Migration
             $table->foreign('updated_by')->references('id')->on('users')->restrictOnDelete();
         });
 
-        Schema::table('donation_banks', function (Blueprint $table) {
+        Schema::table('donation_iban_details', function (Blueprint $table) {
+            $table->foreign('donation_method_id')->references('id')->on('donation_methods')->restrictOnDelete();
             $table->foreign('created_by')->references('id')->on('users')->restrictOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->restrictOnDelete();
         });
 
-        Schema::table('donation_mobiles', function (Blueprint $table) {
+        Schema::table('donation_methods', function (Blueprint $table) {
             $table->foreign('created_by')->references('id')->on('users')->restrictOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->restrictOnDelete();
+        });
+
+        Schema::table('donation_method_steps', function (Blueprint $table) {
+            $table->foreign('donation_method_id')->references('id')->on('donation_methods')->restrictOnDelete();
         });
 
         Schema::table('donations', function (Blueprint $table) {
@@ -393,13 +403,17 @@ return new class extends Migration
             $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
         });
-        Schema::table('donation_mobiles', function (Blueprint $table) {
+        Schema::table('donation_methods', function (Blueprint $table) {
             $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
         });
-        Schema::table('donation_banks', function (Blueprint $table) {
+        Schema::table('donation_iban_details', function (Blueprint $table) {
+            $table->dropForeign(['donation_method_id']);
             $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
+        });
+        Schema::table('donation_method_steps', function (Blueprint $table) {
+            $table->dropForeign(['donation_method_id']);
         });
         Schema::table('teams', function (Blueprint $table) {
             $table->dropForeign(['created_by']);
@@ -413,12 +427,7 @@ return new class extends Migration
             $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
         });
-        Schema::table('about_goals', function (Blueprint $table) {
-            $table->dropForeign(['created_by']);
-            $table->dropForeign(['updated_by']);
-        });
         Schema::table('abouts', function (Blueprint $table) {
-            $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
         });
         Schema::table('contact_messages', function (Blueprint $table) {
@@ -434,7 +443,6 @@ return new class extends Migration
             $table->dropForeign(['updated_by']);
         });
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropForeign(['blog_id']);
             $table->dropForeign(['category_id']);
             $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
@@ -467,7 +475,6 @@ return new class extends Migration
         Schema::dropIfExists('teams');
         Schema::dropIfExists('partners');
         Schema::dropIfExists('about_values');
-        Schema::dropIfExists('about_goals');
         Schema::dropIfExists('abouts');
         Schema::dropIfExists('videos');
         Schema::dropIfExists('images');

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
 use App\Repositories\Contracts\BlogRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -14,10 +13,15 @@ class BlogController extends Controller
     {
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
-        $size = $request->query('per_page', 10);
-        return response()->json(Blog::paginate($size));
+        $perPage = $request->query('per_page', 15);
+
+        $results = Auth::guard('sanctum')->check()
+            ? $this->blogs->paginate($perPage)
+            : $this->blogs->forPagePublic($perPage);
+
+        return response()->json($results);
     }
 
     public function store(Request $request): JsonResponse
@@ -55,7 +59,13 @@ class BlogController extends Controller
 
     public function show(int $id): JsonResponse
     {
-        return response()->json($this->blogs->find($id));
+        $blog = $this->blogs->find($id);
+
+        if (!$blog || (!Auth::guard('sanctum')->check() && !$blog->is_public)) {
+            return response()->json(null, 404);
+        }
+
+        return response()->json($blog);
     }
 
     public function update(Request $request, int $id): JsonResponse

@@ -13,10 +13,10 @@ class AreaIntroController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $items = $this->areaIntros->all();
-        return response()->json($items);
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->areaIntros->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse

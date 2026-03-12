@@ -15,8 +15,8 @@ class ImageController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $size = $request->query('per_page', 10);
-        return response()->json($this->images->allDateOrder());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->images->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse

@@ -13,14 +13,25 @@ class ContactMessageController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->contactMessages->all());
+        $per_page = $request->query('per_page', 10);
+        return response()->json($this->contactMessages->paginate($per_page));
     }
 
     public function store(Request $request): JsonResponse
     {
         $data = $request->all();
+        //store file if exists
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = 'message_file_' . time() . '.' . $file->getClientOriginalExtension();
+            
+            $path = $file->storeAs('data/message_files', $fileName, 'public');
+            
+            $data['file'] = asset('storage/' . $path);
+        }
+
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
         $created = $this->contactMessages->create($data);
@@ -36,6 +47,27 @@ class ContactMessageController extends Controller
     {
         $data = $request->all();
         $data['updated_by'] = Auth::id();
+        if ($request->hasFile('file')) {
+            $message = $this->contactMessages->find($id);
+            $filePath = public_path($message->file);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+
+            $file = $request->file('file');
+            $fileName = 'message_file_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('data/message_files', $fileName, 'public');
+            $data['file'] = asset('storage/' . $path);
+        }
+
+        $updated = $this->contactMessages->update($id, $data);
+        return response()->json($updated);
+    }
+
+    public function patchSeen(int $id): JsonResponse
+    {
+        $data['seen_by'] = Auth::id();
+        $data['seen'] = true;
         $updated = $this->contactMessages->update($id, $data);
         return response()->json($updated);
     }

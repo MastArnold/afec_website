@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 // Base repositories already autoloaded via PSR-4
 // Contracts
 use App\Repositories\Contracts\AboutRepositoryInterface;
-use App\Repositories\Contracts\AboutGoalsRepositoryInterface;
+use App\Repositories\Contracts\AboutMissionRepositoryInterface;
 use App\Repositories\Contracts\AboutValuesRepositoryInterface;
 use App\Repositories\Contracts\BlogRepositoryInterface;
 use App\Repositories\Contracts\BlogCategoryRepositoryInterface;
@@ -29,9 +29,17 @@ use App\Repositories\Contracts\VideoRepositoryInterface;
 use App\Repositories\Contracts\VideoCategoryRepositoryInterface;
 use App\Repositories\Contracts\AreaIntroRepositoryInterface;
 use App\Repositories\Contracts\AreaRepositoryInterface;
+use App\Repositories\Contracts\CarouselRepositoryInterface;
+use App\Repositories\Contracts\DonationMethodRepositoryInterface;
+use App\Repositories\Contracts\DonationIbanDetailRepositoryInterface;
+use App\Repositories\Contracts\DonationMethodStepRepositoryInterface;
+use App\Repositories\Contracts\UserRoleRepositoryInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\DonationSectionRepositoryInterface;
+use App\Repositories\Contracts\DonationSectionImageRepositoryInterface;
 // Eloquent implementations
 use App\Repositories\Eloquent\AboutRepository;
-use App\Repositories\Eloquent\AboutGoalsRepository;
+use App\Repositories\Eloquent\AboutMissionRepository;
 use App\Repositories\Eloquent\AboutValuesRepository;
 use App\Repositories\Eloquent\BlogRepository;
 use App\Repositories\Eloquent\BlogCategoryRepository;
@@ -54,6 +62,14 @@ use App\Repositories\Eloquent\VideoRepository;
 use App\Repositories\Eloquent\VideoCategoryRepository;
 use App\Repositories\Eloquent\AreaIntroRepository;
 use App\Repositories\Eloquent\AreaRepository;
+use App\Repositories\Eloquent\CarouselRepository;
+use App\Repositories\Eloquent\DonationMethodRepository;
+use App\Repositories\Eloquent\DonationIbanDetailRepository;
+use App\Repositories\Eloquent\DonationMethodStepRepository;
+use App\Repositories\Eloquent\UserRoleRepository;
+use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\Eloquent\DonationSectionRepository;
+use App\Repositories\Eloquent\DonationSectionImageRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -64,8 +80,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Bind all repository interfaces to their Eloquent implementations
         $this->app->bind(AboutRepositoryInterface::class, AboutRepository::class);
-        $this->app->bind(AboutGoalsRepositoryInterface::class, AboutGoalsRepository::class);
         $this->app->bind(AboutValuesRepositoryInterface::class, AboutValuesRepository::class);
+        $this->app->bind(AboutMissionRepositoryInterface::class, AboutMissionRepository::class);
         $this->app->bind(BlogRepositoryInterface::class, BlogRepository::class);
         $this->app->bind(BlogCategoryRepositoryInterface::class, BlogCategoryRepository::class);
         $this->app->bind(BlogFileRepositoryInterface::class, BlogFileRepository::class);
@@ -87,6 +103,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(VideoCategoryRepositoryInterface::class, VideoCategoryRepository::class);
         $this->app->bind(AreaIntroRepositoryInterface::class, AreaIntroRepository::class);
         $this->app->bind(AreaRepositoryInterface::class, AreaRepository::class);
+        $this->app->bind(CarouselRepositoryInterface::class, CarouselRepository::class);
+        $this->app->bind(DonationMethodRepositoryInterface::class, DonationMethodRepository::class);
+        $this->app->bind(DonationIbanDetailRepositoryInterface::class, DonationIbanDetailRepository::class);
+        $this->app->bind(DonationMethodStepRepositoryInterface::class, DonationMethodStepRepository::class);
+        $this->app->bind(UserRoleRepositoryInterface::class, UserRoleRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(DonationSectionRepositoryInterface::class, DonationSectionRepository::class);
+        $this->app->bind(DonationSectionImageRepositoryInterface::class, DonationSectionImageRepository::class);
     }
 
     /**

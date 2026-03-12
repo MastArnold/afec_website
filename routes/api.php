@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ApiAuthController;
 use App\Http\Controllers\AreaIntroController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\AboutGoalsController;
+use App\Http\Controllers\AboutMissionController;
 use App\Http\Controllers\AboutValuesController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogCategoryController;
@@ -26,31 +27,84 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VideoCategoryController;
+use App\Http\Controllers\DonationMethodController;
+use App\Http\Controllers\DonationIbanDetailController;
+use App\Http\Controllers\DonationMethodStepController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\DonationSectionController;
 
-Route::name('api.')->group(function () {
+// Auth
+Route::prefix('auth')->group(function () {
+    Route::post('login', [ApiAuthController::class, 'login']);
+    Route::post('logout', [ApiAuthController::class, 'logout'])->middleware('auth:sanctum');
+});
+
+// Routes publiques (GET index + show, POST messages)
+Route::apiResource('abouts', AboutController::class)->only(['index', 'show']);
+Route::apiResource('about-mission', AboutMissionController::class)->only(['index', 'show']);
+Route::apiResource('about-values', AboutValuesController::class)->only(['index', 'show']);
+Route::apiResource('blogs', BlogController::class)->only(['index', 'show']);
+Route::apiResource('blog-categories', BlogCategoryController::class)->only(['index', 'show']);
+Route::apiResource('blog-files', BlogFileController::class)->only(['index', 'show']);
+Route::apiResource('contact-addresses', ContactAddressController::class)->only(['index', 'show']);
+Route::apiResource('contact-socials', ContactSocialController::class)->only(['index', 'show']);
+Route::apiResource('donations', DonationController::class)->only(['index', 'show']);
+Route::apiResource('donation-banks', DonationBankController::class)->only(['index', 'show']);
+Route::apiResource('donation-mobiles', DonationMobileController::class)->only(['index', 'show']);
+Route::apiResource('payment-methods', DonationMethodController::class)->only(['index', 'show']);
+Route::apiResource('payment-iban-details', DonationIbanDetailController::class)->only(['index', 'show']);
+Route::apiResource('payment-method-steps', DonationMethodStepController::class)->only(['index', 'show']);
+Route::apiResource('year-themes', HomeController::class)->only(['index', 'show']);
+Route::apiResource('images', ImageController::class)->only(['index', 'show']);
+Route::apiResource('image-categories', ImageCategoryController::class)->only(['index', 'show']);
+Route::apiResource('slides', CarouselController::class)->only(['index', 'show']);
+Route::apiResource('partners', PartnerController::class)->only(['index', 'show']);
+Route::apiResource('teams', TeamController::class)->only(['index', 'show']);
+Route::apiResource('videos', VideoController::class)->only(['index', 'show']);
+Route::apiResource('video-categories', VideoCategoryController::class)->only(['index', 'show']);
+Route::post('messages', [ContactMessageController::class, 'store']);
+Route::get('donation-section', [DonationSectionController::class, 'show']);
+Route::get('donation-section-images', [DonationSectionController::class, 'index']);
+
+// Routes protégées
+Route::middleware('auth:sanctum')->name('api.')->group(function () {
     Route::apiResource('area-intros', AreaIntroController::class);
     Route::apiResource('areas', AreaController::class);
-    Route::apiResource('abouts', AboutController::class);
-    Route::apiResource('about-goals', AboutGoalsController::class);
-    Route::apiResource('about-values', AboutValuesController::class);
-    Route::apiResource('blogs', BlogController::class);
-    Route::apiResource('blog-categories', BlogCategoryController::class);
-    Route::apiResource('blog-files', BlogFileController::class);
-    Route::apiResource('contact-addresses', ContactAddressController::class);
-    Route::apiResource('contact-messages', ContactMessageController::class);
+    Route::apiResource('abouts', AboutController::class)->except(['index', 'show']);
+    Route::apiResource('about-mission', AboutMissionController::class)->except(['index', 'show']);
+    Route::apiResource('about-values', AboutValuesController::class)->except(['index', 'show']);
+    Route::apiResource('blogs', BlogController::class)->except(['index', 'show']);
+    Route::apiResource('blog-categories', BlogCategoryController::class)->except(['index', 'show']);
+    Route::apiResource('blog-files', BlogFileController::class)->except(['index', 'show']);
+    Route::apiResource('contact-addresses', ContactAddressController::class)->except(['index', 'show']);
+    Route::apiResource('contact-socials', ContactSocialController::class)->except(['index', 'show']);
+    Route::apiResource('donations', DonationController::class)->except(['index', 'show']);
+    Route::apiResource('donation-banks', DonationBankController::class)->except(['index', 'show']);
+    Route::apiResource('donation-mobiles', DonationMobileController::class)->except(['index', 'show']);
+    Route::apiResource('payment-methods', DonationMethodController::class)->except(['index', 'show']);
+    Route::apiResource('payment-iban-details', DonationIbanDetailController::class)->except(['index', 'show']);
+    Route::apiResource('payment-method-steps', DonationMethodStepController::class)->except(['index', 'show']);
+    Route::put('year-themes/{id}/activate', [HomeController::class, 'patchActive']);
+    Route::apiResource('year-themes', HomeController::class)->except(['index', 'show']);
+    Route::apiResource('images', ImageController::class)->except(['index', 'show']);
+    Route::apiResource('image-categories', ImageCategoryController::class)->except(['index', 'show']);
+    Route::put('slides/{id}/order', [CarouselController::class, 'patchSlideOrder']);
+    Route::apiResource('slides', CarouselController::class)->except(['index', 'show']);
+    Route::apiResource('partners', PartnerController::class)->except(['index', 'show']);
+    Route::apiResource('teams', TeamController::class)->except(['index', 'show']);
+    Route::put('videos/{id}/activate', [VideoController::class, 'patchActivate']);
+    Route::put('videos/{id}/unactivate', [VideoController::class, 'patchUnactivate']);
+    Route::apiResource('videos', VideoController::class)->except(['index', 'show']);
+    Route::apiResource('video-categories', VideoCategoryController::class)->except(['index', 'show']);
+    Route::apiResource('messages', ContactMessageController::class)->except(['store']);
+    Route::put('messages/{id}/seen', [ContactMessageController::class, 'patchSeen']);
     Route::apiResource('contact-settings', ContactSettingController::class);
-    Route::apiResource('contact-socials', ContactSocialController::class);
-    Route::apiResource('donations', DonationController::class);
-    Route::apiResource('donation-banks', DonationBankController::class);
-    Route::apiResource('donation-mobiles', DonationMobileController::class);
     Route::apiResource('generals', GeneralController::class);
-    Route::apiResource('homes', HomeController::class);
     Route::apiResource('home-carousels', HomeCarouselController::class);
-    Route::apiResource('carousels', CarouselController::class);
-    Route::apiResource('images', ImageController::class);
-    Route::apiResource('image-categories', ImageCategoryController::class);
-    Route::apiResource('partners', PartnerController::class);
-    Route::apiResource('teams', TeamController::class);
-    Route::apiResource('videos', VideoController::class);
-    Route::apiResource('video-categories', VideoCategoryController::class);
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('user-roles', UserRoleController::class);
+    Route::put('donation-section', [DonationSectionController::class, 'update']);
+    Route::post('donation-section-images', [DonationSectionController::class, 'store']);
+    Route::delete('donation-section-images/{id}', [DonationSectionController::class, 'destroy']);
 });

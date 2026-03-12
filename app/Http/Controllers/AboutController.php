@@ -13,16 +13,23 @@ class AboutController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->about->all());
+        $perPage = $request->query('per_page', 15);
+        return response()->json($this->about->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse
     {
+        //check if it exist one and then update it
+        $about = $this->about->all()->first();
+        if ($about) {
+            return $this->update($request, $about->id);
+        }
+
         $data = $request->all();
-        $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+
         $created = $this->about->create($data);
         return response()->json($created, 201);
     }
@@ -36,12 +43,19 @@ class AboutController extends Controller
     {
         $data = $request->all();
         $data['updated_by'] = Auth::id();
+
         $updated = $this->about->update($id, $data);
         return response()->json($updated);
     }
 
     public function destroy(int $id): JsonResponse
     {
+        $about = $this->about->find($id);
+        $imagePath = public_path($about->image);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
         $this->about->delete($id);
         return response()->json(null, 204);
     }

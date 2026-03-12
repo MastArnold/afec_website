@@ -12,6 +12,8 @@ class Team extends Model
         'name',
         'role',
         'photo',
+        'department',
+        'order',
         'is_public',
         'created_by',
         'updated_by',
