@@ -12,14 +12,15 @@ use Illuminate\Support\Facades\Auth;
 
 class CarouselController extends Controller
 {
-    public function __construct(private CarouselRepositoryInterface $blogs)
+    public function __construct(private CarouselRepositoryInterface $carousels)
     {
     }
 
     public function index(Request $request): AnonymousResourceCollection
     {
         $perPage = $request->query('per_page', 15);
-        return CarouselResource::collection($this->blogs->paginate($perPage));
+    
+        return CarouselResource::collection($this->carousels->paginate($perPage));
     }
 
     public function store(Request $request): JsonResponse
@@ -37,7 +38,8 @@ class CarouselController extends Controller
             // Add the image URL to the data
             $data['image'] = asset('storage/' . $path);
         }
-        $created = $this->blogs->create($data);
+
+        $created = $this->carousels->create($data);
         return (new CarouselResource($created))
                 ->response()
                 ->setStatusCode(201);;
@@ -46,14 +48,32 @@ class CarouselController extends Controller
 
     public function show(int $id): JsonResponse|CarouselResource
     {
-        return new CarouselResource($this->blogs->find($id));
+        return new CarouselResource($this->carousels->find($id));
     }
 
     public function update(Request $request, int $id): JsonResponse|CarouselResource
     {
         $data = $request->all();
         $data['updated_by'] = Auth::id();
-        $updated = $this->blogs->update($id, $data);
+        //store the image
+        if ($request->hasFile('cover')) {
+            //delete the current image
+            $carousel = $this->carousels->find($id);
+            $imagePath = public_path($carousel->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+            $image = $request->file('cover');
+            $imageName = 'carousel_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/carousels', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['image'] = asset('storage/' . $path);
+        }
+
+        $updated = $this->carousels->update($id, $data);
         return new CarouselResource($updated);
     }
 
@@ -62,13 +82,19 @@ class CarouselController extends Controller
         $data = $request->all();
         $data['order'] = $request->order;
         $data['updated_by'] = Auth::id();
-        $updated = $this->blogs->update($id, $data);
+        $updated = $this->carousels->update($id, $data);
         return new CarouselResource($updated);
     }
 
     public function destroy(int $id): JsonResponse
     {
-        $this->blogs->delete($id);
+        //delete the image
+        $blog = $this->carousels->find($id);
+        $imagePath = public_path($blog->image);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+        $this->carousels->delete($id);
         return response()->json(null, 204);
     }
 }

@@ -64,7 +64,7 @@ class VideoController extends Controller
         $data['updated_by'] = Auth::id();
         if ($request->hasFile('video')) {
 
-            //delete the current image
+            //delete the current video
             $video = $this->videos->find($id);
             $videoPath = public_path($video->url);
             if (file_exists($videoPath)) {

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\About;
-use App\Models\AboutGoals;
 use App\Models\AboutValues;
 use App\Models\Partner;
 use App\Models\Team;
@@ -24,23 +23,6 @@ class AboutSeeder extends Seeder
             'cover_4' => 'storage/about/col-2-row-2.jpg',
             'mission' => '',
             'transition_image' => 'storage/about/transition.jpg',
-        ]);
-
-        #
-
-        AboutGoals::create([
-            'name' => 'Projets',
-            'value' => '+ 600'
-        ]);
-
-        AboutGoals::create([
-            'name' => 'Interventions',
-            'value' => '+ 2000',
-        ]);
-
-        AboutGoals::create([
-            'name' => 'Donations',
-            'value' => '+ 44 million',
         ]);
 
         #

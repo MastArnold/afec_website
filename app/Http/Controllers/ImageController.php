@@ -56,6 +56,12 @@ class ImageController extends Controller
 
     public function destroy(int $id): JsonResponse
     {
+        //delete image
+        $image = $this->images->find($id);
+        $imagePath = public_path($image->image);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
         $this->images->delete($id);
         return response()->json(null, 204);
     }

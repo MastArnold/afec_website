@@ -72,12 +72,38 @@ class BlogController extends Controller
     {
         $data = $request->all();
         $data['updated_by'] = Auth::id();
+        //store the cover
+        if ($request->hasFile('cover')) {
+            //delete the current cover
+            $blog = $this->blogs->find($id);
+            $imagePath = public_path($blog->cover);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            $image = $request->file('cover');
+            $imageName = 'blog_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            // Store the image in the public/storage/data/gallery directory
+            $path = $image->storeAs('data/blog', $imageName, 'public');
+            
+            // Add the image URL to the data
+            $data['cover'] = asset('storage/' . $path);
+        }
+
         $updated = $this->blogs->update($id, $data);
         return response()->json($updated);
     }
 
     public function destroy(int $id): JsonResponse
     {
+        //delete the image
+        $blog = $this->blogs->find($id);
+        $imagePath = public_path($blog->cover);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
         $this->blogs->delete($id);
         return response()->json(null, 204);
     }
