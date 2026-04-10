@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\NotificationEntity;
 use App\Repositories\Contracts\ContactMessageRepositoryInterface;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -35,6 +37,13 @@ class ContactMessageController extends Controller
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
         $created = $this->contactMessages->create($data);
+
+        NotificationService::notifyAdmins(
+            NotificationEntity::Message,
+            $created->id,
+            "Nouveau message de : {$created->name}",
+        );
+
         return response()->json($created, 201);
     }
 

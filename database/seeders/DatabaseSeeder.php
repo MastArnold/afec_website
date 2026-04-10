@@ -16,12 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(UserRoleSeeder::class);
 
         User::create([
-            'name' => 'Administrateur',
-            'email' => 'admin@afec.cloud',
+            'name'     => 'Administrateur',
+            'email'    => 'admin@afec.bf',
             'password' => Hash::make('12345'),
+            'role_id'  => 1, // superadmin
         ]);
     }
 }

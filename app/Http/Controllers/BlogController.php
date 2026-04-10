@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\NotificationEntity;
 use App\Repositories\Contracts\BlogRepositoryInterface;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -53,45 +55,78 @@ class BlogController extends Controller
             $data['files'] = $fileNames;
         }
 
+        $data['slug'] = $this->blogs->generateUniqueSlug($data['title']);
+
         $created = $this->blogs->create($data);
+
+        if (!empty($data['is_public'])) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Blog,
+                $created->id,
+                "Nouvel article publié : {$created->title}",
+                Auth::id()
+            );
+        }
+
         return response()->json($created, 201);
     }
 
-    public function show(int $id): JsonResponse
+    public function show(string $blog): JsonResponse
     {
-        $blog = $this->blogs->find($id);
+        $item = is_numeric($blog)
+            ? $this->blogs->find((int) $blog)
+            : $this->blogs->findBySlug($blog);
 
-        if (!$blog || (!Auth::guard('sanctum')->check() && !$blog->is_public)) {
+        if (!$item || (!Auth::guard('sanctum')->check() && !$item->is_public)) {
             return response()->json(null, 404);
         }
 
-        return response()->json($blog);
+        return response()->json($item);
     }
 
     public function update(Request $request, int $id): JsonResponse
     {
+        $current = $this->blogs->find($id);
         $data = $request->all();
         $data['updated_by'] = Auth::id();
         //store the cover
         if ($request->hasFile('cover')) {
             //delete the current cover
-            $blog = $this->blogs->find($id);
-            $imagePath = public_path($blog->cover);
+            $imagePath = public_path($current->cover);
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
 
             $image = $request->file('cover');
             $imageName = 'blog_' . time() . '.' . $image->getClientOriginalExtension();
-            
-            // Store the image in the public/storage/data/gallery directory
             $path = $image->storeAs('data/blog', $imageName, 'public');
-            
-            // Add the image URL to the data
             $data['cover'] = asset('storage/' . $path);
         }
 
         $updated = $this->blogs->update($id, $data);
+
+        $isPublishing = isset($data['is_public']) && !$current->is_public && (bool) $data['is_public'];
+        unset($data['slug']); // le slug est immuable après création
+
+        $ignored = ['is_public', 'updated_by', '_method', '_token'];
+        $otherFieldsChanged = count(array_diff_key($data, array_flip($ignored))) > 0;
+
+        if ($isPublishing) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Blog,
+                $id,
+                "Nouvel article publié : {$current->title}",
+                Auth::id()
+            );
+        } elseif ($otherFieldsChanged) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Blog,
+                $id,
+                "Article modifié : {$current->title}",
+                Auth::id()
+            );
+        }
+
         return response()->json($updated);
     }
 

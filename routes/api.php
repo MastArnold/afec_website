@@ -33,6 +33,7 @@ use App\Http\Controllers\DonationMethodStepController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\DonationSectionController;
+use App\Http\Controllers\NotificationController;
 
 // Auth
 Route::prefix('auth')->group(function () {
@@ -107,4 +108,7 @@ Route::middleware('auth:sanctum')->name('api.')->group(function () {
     Route::put('donation-section', [DonationSectionController::class, 'update']);
     Route::post('donation-section-images', [DonationSectionController::class, 'store']);
     Route::delete('donation-section-images/{id}', [DonationSectionController::class, 'destroy']);
+    Route::get('notifications', [NotificationController::class, 'index']);
+    Route::put('notifications/{id}/read', [NotificationController::class, 'markAsRead']);
+    Route::put('notifications/read-all', [NotificationController::class, 'markAllAsRead']);
 });

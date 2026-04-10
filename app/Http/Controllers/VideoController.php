@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\NotificationEntity;
 use App\Http\Resources\VideoResource;
 use App\Repositories\Contracts\VideoRepositoryInterface;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -50,6 +52,16 @@ class VideoController extends Controller
         }
 
         $created = $this->videos->create($data);
+
+        if (!empty($data['is_public'])) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Video,
+                $created->id,
+                "Nouvelle vidéo publiée : {$created->title}",
+                Auth::id()
+            );
+        }
+
         return response()->json($created, 201);
     }
 
@@ -60,6 +72,7 @@ class VideoController extends Controller
 
     public function update(Request $request, int $id): JsonResponse
     {
+        $current = $this->videos->find($id);
         $data = $request->all();
         $data['updated_by'] = Auth::id();
         if ($request->hasFile('video')) {
@@ -100,6 +113,27 @@ class VideoController extends Controller
         }
 
         $updated = $this->videos->update($id, $data);
+
+        $isPublishing = isset($data['is_public']) && !$current->is_public && (bool) $data['is_public'];
+        $ignored = ['is_public', 'updated_by', '_method', '_token'];
+        $otherFieldsChanged = count(array_diff_key($data, array_flip($ignored))) > 0;
+
+        if ($isPublishing) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Video,
+                $id,
+                "Nouvelle vidéo publiée : {$current->title}",
+                Auth::id()
+            );
+        } elseif ($otherFieldsChanged) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Video,
+                $id,
+                "Vidéo modifiée : {$current->title}",
+                Auth::id()
+            );
+        }
+
         return response()->json($updated);
     }
 

@@ -14,6 +14,7 @@ class Blog extends Model
         'date',
         'planned_date',
         'title',
+        'slug',
         'content',
         'is_public',
         'is_featured',

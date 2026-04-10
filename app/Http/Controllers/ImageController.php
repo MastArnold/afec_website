@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\NotificationEntity;
 use App\Repositories\Contracts\ImageRepositoryInterface;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -38,6 +40,16 @@ class ImageController extends Controller
         }
 
         $created = $this->images->create($data);
+
+        if (!empty($data['is_public'])) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Image,
+                $created->id,
+                "Nouvelle image publiée : {$created->title}",
+                Auth::id()
+            );
+        }
+
         return response()->json($created, 201);
     }
 
@@ -48,9 +60,31 @@ class ImageController extends Controller
 
     public function update(Request $request, int $id): JsonResponse
     {
+        $current = $this->images->find($id);
         $data = $request->all();
         $data['updated_by'] = Auth::id();
         $updated = $this->images->update($id, $data);
+
+        $isPublishing = isset($data['is_public']) && !$current->is_public && (bool) $data['is_public'];
+        $ignored = ['is_public', 'updated_by', '_method', '_token'];
+        $otherFieldsChanged = count(array_diff_key($data, array_flip($ignored))) > 0;
+
+        if ($isPublishing) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Image,
+                $id,
+                "Nouvelle image publiée : {$current->title}",
+                Auth::id()
+            );
+        } elseif ($otherFieldsChanged) {
+            NotificationService::notifyAdmins(
+                NotificationEntity::Image,
+                $id,
+                "Image modifiée : {$current->title}",
+                Auth::id()
+            );
+        }
+
         return response()->json($updated);
     }
 
