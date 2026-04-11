@@ -141,14 +141,3 @@ php artisan route:list
 ```
 
 ---
-
-## Conventions outillage Claude
-
-Toujours préfixer les commandes shell avec `rtk` pour réduire les tokens (instructions complètes dans `~/.claude/CLAUDE.md`) :
-
-```bash
-rtk php artisan migrate
-rtk php artisan route:list
-rtk git status
-rtk git diff
-```
