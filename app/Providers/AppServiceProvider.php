@@ -39,6 +39,9 @@ use App\Repositories\Contracts\DonationSectionRepositoryInterface;
 use App\Repositories\Contracts\DonationSectionImageRepositoryInterface;
 use App\Repositories\Contracts\NotificationRepositoryInterface;
 use App\Repositories\Contracts\ContactMessageSubjectRepositoryInterface;
+use App\Repositories\Contracts\ProjectRepositoryInterface;
+use App\Repositories\Contracts\ProjectCategoryRepositoryInterface;
+use App\Repositories\Contracts\ProjectImageRepositoryInterface;
 // Eloquent implementations
 use App\Repositories\Eloquent\AboutRepository;
 use App\Repositories\Eloquent\AboutMissionRepository;
@@ -74,6 +77,9 @@ use App\Repositories\Eloquent\DonationSectionRepository;
 use App\Repositories\Eloquent\DonationSectionImageRepository;
 use App\Repositories\Eloquent\NotificationRepository;
 use App\Repositories\Eloquent\ContactMessageSubjectRepository;
+use App\Repositories\Eloquent\ProjectRepository;
+use App\Repositories\Eloquent\ProjectCategoryRepository;
+use App\Repositories\Eloquent\ProjectImageRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -117,6 +123,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DonationSectionImageRepositoryInterface::class, DonationSectionImageRepository::class);
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         $this->app->bind(ContactMessageSubjectRepositoryInterface::class, ContactMessageSubjectRepository::class);
+        $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
+        $this->app->bind(ProjectCategoryRepositoryInterface::class, ProjectCategoryRepository::class);
+        $this->app->bind(ProjectImageRepositoryInterface::class, ProjectImageRepository::class);
     }
 
     /**

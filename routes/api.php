@@ -35,6 +35,8 @@ use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\DonationSectionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ContactMessageSubjectController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectCategoryController;
 
 // Auth
 Route::prefix('auth')->group(function () {
@@ -69,6 +71,8 @@ Route::post('messages', [ContactMessageController::class, 'store']);
 Route::apiResource('message-subjects', ContactMessageSubjectController::class)->only(['index', 'show']);
 Route::get('donation-section', [DonationSectionController::class, 'show']);
 Route::get('donation-section-images', [DonationSectionController::class, 'index']);
+Route::apiResource('projects', ProjectController::class)->only(['index', 'show']);
+Route::apiResource('project-categories', ProjectCategoryController::class)->only(['index', 'show']);
 
 // Routes protégées
 Route::middleware('auth:sanctum')->name('api.')->group(function () {
@@ -116,4 +120,6 @@ Route::middleware('auth:sanctum')->name('api.')->group(function () {
     Route::get('notifications', [NotificationController::class, 'index']);
     Route::put('notifications/{id}/read', [NotificationController::class, 'markAsRead']);
     Route::put('notifications/read-all', [NotificationController::class, 'markAllAsRead']);
+    Route::apiResource('projects', ProjectController::class)->except(['index', 'show']);
+    Route::apiResource('project-categories', ProjectCategoryController::class)->except(['index', 'show']);
 });

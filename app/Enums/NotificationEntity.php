@@ -8,4 +8,5 @@ enum NotificationEntity: string
     case Image   = 'image';
     case Video   = 'video';
     case Message = 'message';
+    case Project = 'project';
 }

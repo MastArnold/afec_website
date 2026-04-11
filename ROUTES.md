@@ -765,6 +765,74 @@ Retourne les notifications de l'utilisateur connecté, triées par date décrois
 
 ---
 
+## PROJECTS
+
+### `GET /projects` 🌐
+Retourne les projets publics (`is_public = true`) paginés, triés par date décroissante.
+Si authentifié 🔒, retourne tous les projets (publics + privés).
+
+### `GET /projects/{slug}` 🌐
+Retourne un projet par son slug (accès public, `is_public = true` requis).
+
+### `GET /projects/{id}` 🔒
+Retourne un projet par son ID (admin).
+
+### `POST /projects` 🔒
+```
+// multipart/form-data
+title        string   requis
+slug         string   ignoré (généré automatiquement)
+year         integer
+category_id  integer  FK project_categories
+cover        file     image de couverture (optionnel)
+date         date     YYYY-MM-DD
+status       string   PENDING | INPROGRESS | COMPLETED | CANCELLED | CONTINUE
+is_public    boolean
+description  string
+
+// Réponse 201 : projet créé
+```
+
+### `PUT /projects/{id}` 🔒
+```
+// multipart/form-data — mêmes champs que POST (slug ignoré)
+// Déclenche une notification si is_public passe à true, ou si d'autres champs sont modifiés
+// Réponse 200 : true
+```
+
+### `DELETE /projects/{id}` 🔒
+```
+// Réponse 204
+```
+
+---
+
+## PROJECT CATEGORIES
+
+### `GET /project-categories` 🌐
+Retourne les catégories de projets paginées.
+
+### `GET /project-categories/{id}` 🌐
+
+### `POST /project-categories` 🔒
+```json
+{ "name": "string" }
+// Réponse 201 : catégorie créée
+```
+
+### `PUT /project-categories/{id}` 🔒
+```json
+{ "name": "string" }
+// Réponse 200 : true
+```
+
+### `DELETE /project-categories/{id}` 🔒
+```
+// Réponse 204
+```
+
+---
+
 ## Codes de réponse
 
 | Code | Signification |
