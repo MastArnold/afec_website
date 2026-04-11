@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactAddressSeeder::class);
         $this->call(ContactSocialSeeder::class);
         $this->call(ArticleCategorySeeder::class);
+        $this->call(DonationMethodSeeder::class);
 
         User::create([
             'name'     => 'Administrateur',
