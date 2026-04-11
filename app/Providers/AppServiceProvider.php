@@ -38,6 +38,7 @@ use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Contracts\DonationSectionRepositoryInterface;
 use App\Repositories\Contracts\DonationSectionImageRepositoryInterface;
 use App\Repositories\Contracts\NotificationRepositoryInterface;
+use App\Repositories\Contracts\ContactMessageSubjectRepositoryInterface;
 // Eloquent implementations
 use App\Repositories\Eloquent\AboutRepository;
 use App\Repositories\Eloquent\AboutMissionRepository;
@@ -72,6 +73,7 @@ use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\DonationSectionRepository;
 use App\Repositories\Eloquent\DonationSectionImageRepository;
 use App\Repositories\Eloquent\NotificationRepository;
+use App\Repositories\Eloquent\ContactMessageSubjectRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -114,6 +116,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DonationSectionRepositoryInterface::class, DonationSectionRepository::class);
         $this->app->bind(DonationSectionImageRepositoryInterface::class, DonationSectionImageRepository::class);
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
+        $this->app->bind(ContactMessageSubjectRepositoryInterface::class, ContactMessageSubjectRepository::class);
     }
 
     /**

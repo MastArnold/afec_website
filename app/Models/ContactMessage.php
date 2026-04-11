@@ -12,7 +12,7 @@ class ContactMessage extends Model
         'sender_name',
         'sender_phone',
         'sender_mail',
-        'subject',
+        'subject_id',
         'message',
         'file',
         'seen',
@@ -26,6 +26,11 @@ class ContactMessage extends Model
         'seen' => 'boolean',
         'is_active' => 'boolean',
     ];
+
+    public function subject()
+    {
+        return $this->belongsTo(ContactMessageSubject::class, 'subject_id');
+    }
 
     public function seenBy()
     {

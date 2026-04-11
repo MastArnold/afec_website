@@ -41,7 +41,7 @@ class ContactMessageController extends Controller
         NotificationService::notifyAdmins(
             NotificationEntity::Message,
             $created->id,
-            "Nouveau message de : {$created->name}",
+            "Nouveau message de : {$created->sender_name}",
         );
 
         return response()->json($created, 201);

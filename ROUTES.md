@@ -242,6 +242,43 @@ cover:       file
 
 ---
 
+## MESSAGE SUBJECTS
+
+### `GET /message-subjects` 🌐
+Liste les sujets disponibles pour le formulaire de contact.
+
+### `GET /message-subjects/{id}` 🌐
+
+### `POST /message-subjects` 🔒
+```json
+{ "name": "string", "order": 0, "is_active": true }
+```
+
+### `PUT /message-subjects/{id}` 🔒 — renommer uniquement
+```json
+{ "name": "string" }
+```
+
+### `PUT /message-subjects/reorder` 🔒 — enregistrer le nouvel ordre après drag & drop
+```json
+[
+  { "id": 1, "order": 0 },
+  { "id": 3, "order": 1 },
+  { "id": 2, "order": 2 }
+]
+// Réponse : 204
+```
+
+### `PUT /message-subjects/{id}/toggle-active` 🔒
+```
+// Body : aucun — inverse is_active (true → false, false → true)
+// Réponse 200 : subject mis à jour
+```
+
+### `DELETE /message-subjects/{id}` 🔒 → `204`
+
+---
+
 ## MESSAGES (Contact)
 
 ### `POST /messages` 🌐 — envoi d'un message par un visiteur
@@ -250,7 +287,7 @@ Content-Type: multipart/form-data
 sender_name:  string
 sender_phone: string (optionnel)
 sender_mail:  string
-subject:      string
+subject_id:   integer (id d'un ContactMessageSubject)
 message:      string
 file:         file (optionnel)
 ```

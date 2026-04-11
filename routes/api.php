@@ -34,6 +34,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\DonationSectionController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ContactMessageSubjectController;
 
 // Auth
 Route::prefix('auth')->group(function () {
@@ -65,6 +66,7 @@ Route::apiResource('teams', TeamController::class)->only(['index', 'show']);
 Route::apiResource('videos', VideoController::class)->only(['index', 'show']);
 Route::apiResource('video-categories', VideoCategoryController::class)->only(['index', 'show']);
 Route::post('messages', [ContactMessageController::class, 'store']);
+Route::apiResource('message-subjects', ContactMessageSubjectController::class)->only(['index', 'show']);
 Route::get('donation-section', [DonationSectionController::class, 'show']);
 Route::get('donation-section-images', [DonationSectionController::class, 'index']);
 
@@ -99,6 +101,9 @@ Route::middleware('auth:sanctum')->name('api.')->group(function () {
     Route::apiResource('videos', VideoController::class)->except(['index', 'show']);
     Route::apiResource('video-categories', VideoCategoryController::class)->except(['index', 'show']);
     Route::apiResource('messages', ContactMessageController::class)->except(['store']);
+    Route::put('message-subjects/reorder', [ContactMessageSubjectController::class, 'reorder']);
+    Route::put('message-subjects/{id}/toggle-active', [ContactMessageSubjectController::class, 'toggleActive']);
+    Route::apiResource('message-subjects', ContactMessageSubjectController::class)->except(['index', 'show']);
     Route::put('messages/{id}/seen', [ContactMessageController::class, 'patchSeen']);
     Route::apiResource('contact-settings', ContactSettingController::class);
     Route::apiResource('generals', GeneralController::class);
