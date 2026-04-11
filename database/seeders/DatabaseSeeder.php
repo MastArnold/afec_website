@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactMessageSubjectSeeder::class);
         $this->call(ContactAddressSeeder::class);
         $this->call(ContactSocialSeeder::class);
+        $this->call(ArticleCategorySeeder::class);
 
         User::create([
             'name'     => 'Administrateur',
