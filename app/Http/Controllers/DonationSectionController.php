@@ -18,7 +18,7 @@ class DonationSectionController extends Controller
 
     public function show(): JsonResponse
     {
-        return response()->json($this->section->first());
+        return response()->json($this->section->firstOrCreate());
     }
 
     public function update(Request $request): JsonResponse
@@ -26,20 +26,16 @@ class DonationSectionController extends Controller
         $data = $request->all();
         $data['updated_by'] = Auth::id();
 
-        $section = $this->section->first();
+        $section = $this->section->firstOrCreate();
+        $this->section->update($section->id, $data);
 
-        if ($section) {
-            $this->section->update($section->id, $data);
-            return response()->json($this->section->first());
-        }
-
-        return response()->json($this->section->create($data));
+        return response()->json($this->section->first());
     }
 
     public function index(Request $request): JsonResponse
     {
         $perPage = $request->query('per_page', 15);
-        return response()->json($this->images->paginate($perPage));
+        return response()->json($this->images->paginateWithImage($perPage));
     }
 
     public function store(Request $request): JsonResponse

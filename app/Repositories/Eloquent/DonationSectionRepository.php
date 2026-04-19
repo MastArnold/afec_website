@@ -17,4 +17,14 @@ class DonationSectionRepository extends BaseRepository implements DonationSectio
     {
         return $this->model->newQuery()->first();
     }
+
+    public function firstOrCreate(): Model
+    {
+        return $this->model->newQuery()->firstOrCreate([], [
+            'title'     => '',
+            'subtitle'  => '',
+            'content'   => '',
+            'is_active' => true,
+        ]);
+    }
 }

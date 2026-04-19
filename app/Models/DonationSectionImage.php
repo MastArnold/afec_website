@@ -9,4 +9,9 @@ class DonationSectionImage extends Model
     protected $fillable = [
         'image_id', //string
     ];
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class, 'image_id');
+    }
 }

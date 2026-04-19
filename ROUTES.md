@@ -649,11 +649,19 @@ is_public:   boolean
 ## DONATION SECTION (singleton)
 
 ### `GET /donation-section` 🌐
-Retourne le texte de la section don.
+Retourne le singleton de la section don. Si aucun enregistrement n'existe en base, il est créé automatiquement avec des valeurs vides.
+```json
+// Réponse 200
+{ "id": 1, "title": "string", "subtitle": "string", "content": "string", "is_active": true }
+```
 
 ### `PUT /donation-section` 🔒
+Crée le singleton s'il n'existe pas, sinon le met à jour.
 ```json
+// Body
 { "title": "string", "subtitle": "string", "content": "string", "is_active": true }
+
+// Réponse 200 : objet mis à jour
 ```
 
 ---
@@ -661,11 +669,34 @@ Retourne le texte de la section don.
 ## DONATION SECTION IMAGES
 
 ### `GET /donation-section-images` 🌐
-Liste paginée des images de la section don.
+Liste paginée des images de la section don. Chaque entrée inclut l'objet `image` imbriqué.
+```json
+// Réponse 200
+{
+  "data": [
+    {
+      "id": 1,
+      "image_id": 5,
+      "image": {
+        "id": 5,
+        "title": "string",
+        "image": "url",
+        "date": "...",
+        "is_public": true
+      }
+    }
+  ],
+  "current_page": 1,
+  "total": 3
+}
+```
 
 ### `POST /donation-section-images` 🔒
 ```json
+// Body
 { "image_id": 12 }
+
+// Réponse 201 : objet créé (sans image imbriquée)
 ```
 
 ### `DELETE /donation-section-images/{id}` 🔒 → `204`
