@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class DonationSectionImage extends Model
 {
     protected $fillable = [
-        'image_id', //string
+        'image_id',
     ];
+
+    protected $with = ['image'];
 
     public function image()
     {
