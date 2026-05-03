@@ -36,10 +36,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->newQuery()->create($data);
     }
 
-    public function update(int $id, array $data): bool
+    public function update(int $id, array $data): ?Model
     {
         $instance = $this->find($id);
-        return $instance ? $instance->update($data) : false;
+        if (!$instance) return null;
+        $instance->update($data);
+        return $instance->fresh();
     }
 
     public function delete(int $id): bool

@@ -17,8 +17,8 @@ class CarouselResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'eyebrow' => $this->sub_title,
-            'subTitle' => $this->description,
+            'subtitle' => $this->sub_title,
+            'description' => $this->description,
             'cta' => $this->cta,
             'cover' => $this->image,
             'link' => $this->link,
